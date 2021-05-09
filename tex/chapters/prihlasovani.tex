@@ -1,9 +1,17 @@
 Přihlašování uživatelů probíhá identickým způsobem pro Frontend i Backend. Aplikace je dostupná pouze pro přihlášené, pokus o přístup bez platného přihlášení vyvolá přesměrování na SignPresenter. Přestože základní URL adresa aplikace vede na \texttt{Homepage:default}, (nepřihlášení) uživatelé jsou vždy přesměrováni nejdříve na přihlašovací stránku.
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{svg/mockup/prihlasovani.eps}
+	\captionsetup{width=\linewidth}
+	\caption[Vzhled přihlašovacího formuláře]{Vzhled přihlašovacího formuláře (zdroj: Freepik.com)}
+	\label{mockup:login}
+\end{figure}
+
 K ověření (autentizaci) uživatele pomocí kombinace uživatelského jména (e-mailové adresy) a hesla v Nette slouží rozhraní \texttt{Authenticator}\footnote{\Verb{Nette\Security\Authenticator}}. Samotný proces ověření inicializuje objekt \texttt{User}\footnote{\label{user}\Verb{Nette\Security\User}}. SignPresenter po odeslání formuláře předá objektu \texttt{User} implementaci rozhraní a následně zavolá metodu \phpinline{User::login($username, $password)}. Pokud ověření selže, je vyvolána výjimka \texttt{AuthenticationException}, která je zachycena v presenteru. Úspěšná autentizace způsobí uložení implementace \texttt{IIdentity} do objektu \texttt{User}.
 
 Jedním z požadavků na aplikaci byla stanovena možnost přihlášení voličů pomocí univerzitních e-mailových adres. Implementace ověřování metodou Single Sign-On přes systém Shibboleth by byla nad rámec této práce a po diskuzi s vedoucím práce bylo zvoleno ověřování pomocí Active Directory přes LDAP. Dalším požadavkem byla možnost přihlášení externích uživatelů bez nutnosti vytvářet jim univerzitní e-mailové adresy. Tohoto bylo docíleno možností ověření vůči databázi aplikace.
-
+\clearpage
 \begin{listing}[ht]
 \phpsnippet{tex/code/autentizace.php}
 \caption{Autentizace v SignPresenter}

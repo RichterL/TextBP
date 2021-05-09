@@ -6,9 +6,18 @@ Aplikační vrstva je tvořena především presentery, které obsluhují požad
 
 \n{2}{Šablony}
 
+\clearpage
 \n{2}{Pomocné třídy}
 
 \n{3}{Datagridy} \label{section:Datagridy}
 Zkráceně gridy, tyto interaktivní tabulky umožňují kromě zobrazení dat i jejich filtraci, stránkování, akce nad řádkem tabulky (např. odkaz směřující na Signál) a mnoho dalších funkcí. Gridy přijímají data jako objekt \phpinline{Datasource}, který může obsahovat data ve formě obyčejného pole nebo dotazu SQL \cite{ContributteDataGrid}. Kromě jednoho případu v této aplikaci vždy pracují s SQL dotazem. Výhoda tohoto přístupu je minimalizování potřebného objemu dat k zobrazení gridu. Po změně filtrace nebo stránky je vždy upraven SQL dotaz a až následně odeslán na databázový server, filtrace a stránkování tedy probíhá přímo na SQL serveru, nikoli pomocí PHP nebo JavaScriptu.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{svg/mockup/datagrid.eps}
+	\captionsetup{width=\linewidth}
+	\caption[Vzhled datagridu]{Vzhled datagridu (zdroj: Freepik.com)}
+	\label{mockup:login}
+\end{figure}
 
 Akce nad řádkem jsou typicky úlohy typu editace, mazání zobrazení detailu a směřují na Signál presenteru (metody handle). Jsou reprezentovány ikonami. Požadavek na vymazání řádku (záznamu) je navíc opatřen potvrzovacím dialogovým oknem, aby nedošlo k nechtěnému smazání při nechtěném kliknutí.

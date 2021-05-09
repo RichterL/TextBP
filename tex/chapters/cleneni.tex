@@ -18,13 +18,13 @@ Prvním krokem zabezpečení neveřejné části webu je samozřejmě omezení p
 Aby veškeré odkazy v aplikaci fungovaly a aby Nette vědělo kam má směřovat požadavky, bylo potřeba upravit základní routování popsané v části \ref{section:routovani}. Routy podporují tzv. moduly, které slouží přesně k takovému rozdělení aplikace na několik oddělených částí. Pro každý modul je možné definovat vlastní routy, seskupení rout do modulů se provádí voláním metody \phpinline{withModule(string $module)} %$ 
 třídy \phpinline{RouteList}. 
 
-Rozšířené nastavení routování je patrné z výňatku kódu \ref{php:newRoute}. Obsahuje nastavení pro lokální testování (admin.volby.l) i simulaci produkčního prostředí na VPS serveru v internetu (admin.volby.lukasrichter.eu). Pro Backendový modul bylo potřeba rozlišit jednotlivá prostředí podle názvu serveru kvůli použití domény čtvrtého řádu, se kterou si Router neporadil. Pro Frontendový modul toto nebylo potřeba, doména třetího řádu (volby.lukasrichter.eu) fungovala v pořádku. Zápis \phpinline{addRoute('/prihlasit', 'Sign:in')} definuje alias pro akci \tt{in} presenteru \tt{SignPresenter}, která je standardně dostupná pod adresou \tt{/sign/in}.
-
 \begin{listing}[ht]
 \phpsnippet{tex/code/newRoute.php}
 \caption{Upravená routa v Nette}
 \label{php:newRoute}
 \end{listing}
+
+Rozšířené nastavení routování je patrné z fragmentu \ref{php:newRoute}. Obsahuje nastavení pro lokální testování (admin.volby.l) i simulaci produkčního prostředí na VPS serveru v internetu (admin.volby.lukasrichter.eu). Pro Backendový modul bylo potřeba rozlišit jednotlivá prostředí podle názvu serveru kvůli použití domény čtvrtého řádu, se kterou si Router neporadil. Pro Frontendový modul toto nebylo potřeba, doména třetího řádu (volby.lukasrichter.eu) fungovala v pořádku. Zápis \phpinline{addRoute('/prihlasit', 'Sign:in')} definuje alias pro akci \tt{in} presenteru \tt{SignPresenter}, která je standardně dostupná pod adresou \tt{/sign/in}.
 
 S tímto nastavením jsou jednotlivé části aplikace dostupné ze samostaných domén (např. admin.volby.utb.cz a volby.utb.cz), které nemusí být fyzicky na stejném serveru. Právě toto dokáže podstatně zvýšit bezpečnost aplikace. Frontendová část (volby.utb.cz) je umístěna na bežném veřejně přístupném serveru, zatímco Backendová část je umístěna na serveru, který nemusí být vůbec dostupný z internetu. Samozřejmě může být rozdílná i samotná doména nižšího řádu, za předpokladu, že jsou správně nastaveny DNS záznamy.
 
