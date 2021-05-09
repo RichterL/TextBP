@@ -62,10 +62,11 @@ Konkrétní implementace modelu popsaného v teoretické části probíhala post
 \input{tex/chapters/cleneni.tex}
 \clearpage
 
-\n{2}{Struktura databáze}
+\n{1}{Doménová vrstva}
 \input{tex/chapters/modelovaVrstva.tex}
 
-\clearpage
+\n{1}{Vrstva infrastruktury}
+
 \n{2}{Přihlašovaní a autentizace} \label{section:prihlasovani}
 \input{tex/chapters/prihlasovani.tex}
 
@@ -73,18 +74,12 @@ Konkrétní implementace modelu popsaného v teoretické části probíhala post
 \n{2}{Oprávnění a autorizace}
 \input{tex/chapters/opravneni.tex}
 
-\clearpage
-\n{2}{Presentery}
-\input{tex/chapters/presentery.tex}
+\n{1}{Aplikační a prezentační vrstva}
+\input{tex/chapters/aplikacniVrstva.tex}
 
-\n{2}{Zpracování hlasovacích lístků} \label{section:zpracovaniHlasu}
+\n{1}{Zpracování hlasovacích lístků} \label{section:zpracovaniHlasu}
+\input{tex/chapters/zpracovaniHlasu.tex}
 
-\n{2}{Další části aplikace}
-
-\n{3}{Datagridy} \label{section:Datagridy}
-Zkráceně gridy, tyto interaktivní tabulky umožňují kromě zobrazení dat i jejich filtraci, stránkování, akce nad řádkem tabulky (např. odkaz směřující na Signál) a mnoho dalších funkcí. Gridy přijímají data jako objekt \phpinline{Datasource}, který může obsahovat data ve formě obyčejného pole nebo dotazu SQL \cite{ContributteDataGrid}. Kromě jednoho případu v této aplikaci vždy pracují s SQL dotazem. Výhoda tohoto přístupu je minimalizování potřebného objemu dat k zobrazení gridu. Po změně filtrace nebo stránky je vždy upraven SQL dotaz a až následně odeslán na databázový server, filtrace a stránkování tedy probíhá přímo na SQL serveru, nikoli pomocí PHP nebo JavaScriptu.
-
-Akce nad řádkem jsou typicky úlohy typu editace, mazání zobrazení detailu a směřují na Signál presenteru (metody handle). Jsou reprezentovány ikonami. Požadavek na vymazání řádku (záznamu) je navíc opatřen potvrzovacím dialogovým oknem, aby nedošlo k nechtěnému smazání při nechtěném kliknutí.
 
 
 % ============================================================================ %

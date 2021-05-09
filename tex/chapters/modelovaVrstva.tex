@@ -1,7 +1,3 @@
-Pomocí stanovených modelů je možné navrhnout podrobnější modely jednotlivých entit a tím pádem i strukturu databáze.
-\obr{Entitně relační diagram}{fig:ERD}{1}{svg/erd3.png}
-\clearpage
-\n{1}{Implementace návrhu}
 Celý proces získání konkrétní entity pro potřeby aplikační vrstvy je postaven na několika návrhových vzorech. Správné užití návrhových vzorů umožní zapouzdřit chování jednotlivých tříd, nebudou vytvářena těsná propojení jednotlivých tříd a celý zdrojový kód bude flexibilnější. Cílem tohoto přístupu je zjednodušení případných budoucích úprav aplikace. Těsné provázání tříd aplikační a databázové vrstvy sice znamená méně náročnou práci při první implementaci, ale o to je náročnější kód v budoucnosti upravit. 
 
 Příkladem může být objekt -- entita, který se umí perzistovat, tj. je přímo závislý na konkrétním úložišti. Při změně úložiště je pak potřeba upravit všechny takové objekty.
@@ -19,3 +15,9 @@ Získávání a manipulace s entitami byla implementována pomocí návrhových 
 Diagram na obrázku \ref{fig:RoleMapper} obecně popisuje použité řešení, které bylo aplikováno na všechny entity. Třída \phpinline{RoleDbMapper} implementuje rozhraní \phpinline{RoleMapper}, které je předáno třídě \phpinline{RoleRepository} jako závislost. V diagramu je použit příklad role, vyhledat ji lze podle Id nebo podle vazby na entitu \phpinline{User}. Vhodné například, pokud chceme zjistit, které konkrétní role má uživatel nastaveny a tedy k jakým prostředkům a akcím má přístup díky pravidlům přiřazeným k jeho daným rolím. Zde je vhodné připomenout diagram na obrázku \ref{fig:AclModel}, který popisuje vazby mezi uživatelem, rolemi atd.
 
 Metody \phpinline{find(), findOne(), findAll()} a \phpinline{findRelated()} slouží k vyhledání entit podle zadaných parametrů. Těmi může být filtr na Id nebo společnou vlastnost ale i vazba na jinou entitu. Metoda \phpinline{getDataSource()} slouží k získání dat pro zobrazení interaktivních tabulek v administraci aplikace. Pomocí metody \phpinline{create()} dokáže vytvořit nové instance entity \phpinline{Role}, které jsou následně předány repozitáři samostatně (\phpinline{findOne()}) nebo jako kolekce (některé mappery předávají objekt \phpinline{...Collection}, některé předávají pole objektů).
+
+
+\n{2}{Struktura databáze}
+Pomocí stanovených modelů je možné navrhnout podrobnější modely jednotlivých entit a tím pádem i strukturu databáze.
+\obr{Entitně relační diagram}{fig:ERD}{1}{svg/erd3.png}
+\clearpage

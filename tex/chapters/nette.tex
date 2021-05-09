@@ -1,8 +1,6 @@
 Jak již bylo řečeno, jedná se architektonický vzor MVP. 
 Jednotlivé části je potřeba chápat jako abstraktní vrstvy, nelze si pod nimi představit konkrétní (PHP) třidy.
-Jedním důvodem je možné prolínání vrstev v rámci jedné třídy, tím druhým a závažnějším je pak nepochopení celého principu MVC/P architektury. Prolínání v Nette vidíme například u jednotlivých presenterů obsahujících í část zobrazovací vrstvy (metody~\phpinline{render}) 
-\koment{https://zdrojak.cz/clanky/nette-framework-refactoring/?show=comments#comment-3554}
-, nepochopením celého principu je pak domění mnohých (začínajících) programátorů, že Model je jeden konkrétní objekt (entita), přičemž modelová vrstva jsou nejen entity ale i business (nebo doménová) logika a dohromady tvoří tuto modelovou vrstvu. Pokud bude tento text zmiňovat \textbf{Presenter}, je tím myšlena konkrétní třída nebo skupina tříd nikoliv vrstva.
+Jedním důvodem je možné prolínání vrstev v rámci jedné třídy, tím druhým a závažnějším je pak nepochopení celého principu MVC/P architektury. Tím je myšleno domění mnohých (začínajících) programátorů, že Model je jeden konkrétní objekt (entita) \koment{zdroj - je nutny?}, přičemž modelová vrstva jsou nejen entity ale i business (nebo doménová) logika a dohromady tvoří tuto modelovou vrstvu. Pokud bude v této práci zmíněn \textbf{Presenter}, je tím myšlena konkrétní třída nebo skupina tříd nikoliv vrstva.
 
 \n{3}{Třída Presenter}
 
