@@ -1,0 +1,94 @@
+\usepackage{lmodern}
+%\usepackage{inconsolata}
+%\renewcommand{\ttdefault}{lmtt}
+%\usepackage{times}
+\usepackage{blindtext}
+\usepackage{dirtree}
+\usepackage[section]{minted}
+\usepackage{fancyvrb}
+\VerbatimFootnotes
+\usemintedstyle{default}
+\renewcommand\listingscaption{Fragment zdrojového kódu}
+\renewcommand{\listoflistingscaption}{SEZNAM FRAGMENTŮ ZDROJOVÉHO KÓDU}
+
+\usepackage{calc}
+
+%\usepackage[none]{hyphenat}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
+
+\graphicspath{{svg/}}
+
+\definecolor{bgLight}{rgb}{0.95,0.95,0.95}
+
+\newmintedfile{php}{
+%startinline,
+xleftmargin=20pt,
+linenos,
+fontsize=\footnotesize,
+%fontseries=l,
+frame=lines,
+framesep=2mm,
+tabsize=2,
+breaklines=true,
+}
+
+\newmintedfile[phpsnippet]{php}{
+startinline,
+xleftmargin=20pt,
+linenos,
+fontsize=\footnotesize,
+%fontseries=l,
+frame=lines,
+framesep=2mm,
+tabsize=2,
+breaklines=true,
+}
+
+\newminted{php}{
+startinline,
+xleftmargin=20pt,
+linenos,
+fontsize=\footnotesize,
+%fontseries=l,
+frame=lines,
+framesep=2mm,
+tabsize=2,
+breaklines=true,
+}
+
+\newmintinline{php}{
+%startinline,
+%bgcolor=bgLight,
+fontseries=m,
+%breaklines=true,
+%breakanywhere=true,
+}
+
+\def\seznamkodu{
+	\clearpage
+	\phantomsection
+	\listoflistings
+	\clearpage
+}
+
+\def\svgobr#1#2#3#4{
+	\begin{figure}[h]
+		\centering \small \fontfamily{lmtt}\fontseries{l}\selectfont
+%		\def\svgscale{#3}
+		\def\svgwidth{#3\columnwidth}
+		\input{svg/#4.pdf_tex}
+		\normalsize \sffamily
+		\captionsetup{width=\linewidth}
+		\caption{#1}
+		\label{#2}
+		
+	\end{figure}
+}
+
+\def\tt#1{
+	\texttt{#1}
+}

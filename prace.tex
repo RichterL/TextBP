@@ -1,0 +1,124 @@
+% ============================================================================ %
+%
+%           Šablona bakalářské/diplomové práce
+%
+% Autor:    Ing. Jozef Říha (2006-05-04), od té doby šablonu udržuje
+%           Ing. Pavel Tomášek, Ph.D. (tomasek@utb.cz)
+%
+% Verze:    2021-03-02
+%
+% Kódování: UTF-8 (kontrolní řetězec: žluťoučký kůň úpěl ďábelšké ódy)
+%
+% Sazba:    pdflatex prace.tex && pdflatex prace.tex
+%           (nutné dvakrát pro korektní vložení citací a jiných referencí),
+%           v případě umístění literatury do externího bib souboru je třeba volat
+%           pdflatex prace.tex && bibtex prace && pdflatex prace.tex && pdflatex prace.tex
+%
+% Tip:      Ve správně vysázeném českém textu by na konci řádku neměla zůstant
+%           samotná jednopísmenná předložka či spojka. Na takové místo se vkládá
+%           nezalomitelná mezera pomocí symbolu ~. Existuje program, který umí
+%           zpracovat celý TeX dokument najednou podle českých konvencí:
+%           http://petr.olsak.net/ftp/olsak/vlna/
+%
+% Pozor:    Vzhledem k požadovanému standardu PDF/A nesmí vložené obrázky 
+%           obsahovat alfa kanál (průhlednost).
+%
+% ============================================================================ %
+
+
+\documentclass[a4paper,12pt]{article}
+
+% Definice vzhledu a nastavení se načítá z následujícího souboru (netřeba editovat)
+\input{tex/UTB.tex}
+\input{tex/setup.tex}
+% Uživatelské definice -- upravte dle požadavků
+\nastavfakultu{FAI}
+	% FAI  -- pro Fakultu aplikované informatiky
+	% FAME -- pro Fakultu managementu a ekonomiky
+	% FHS  -- pro Fakultu humanitních studií
+	% FLKR -- pro Fakultu logistiky a krizového řízení
+	% FMK  -- pro Fakutlu mutimediálních komunikací
+	% FT   -- pro Fakultu technologickou
+	% UNI  -- pro Univerzitní institut
+\nastavtyp{BP}
+	% BP   -- bakalářská práce
+	% DP   -- diplomová práce
+\nastavrok{2021}
+	% zadejte rok místo "xxxx"
+\nastavjazyk{CZ}
+	% CZ   -- práce bude v českém jazyce
+	% EN   -- práce bude v anglickém jazyce
+
+% Lze přidat vertikalni odsazeni nad (prvni parametr) a pod (druhy parametr)
+% obrázky, tabulky i rovnice/soustavy rovnic
+\nastavmezerukolemobrazku{0mm}{0mm}
+\nastavmezerukolemtabulek{0mm}{0mm}
+\nastavmezerukolemrovnic{0mm}{0mm}
+
+\nastavautora{Lukáš Richter}
+\nastavnazevcz{Elektronický hlasovací systém}
+\nastavnazeven{Název práce anglicky (max. 2 řádky)} % Jen u anglicky psané práce
+\nastavabstraktcz{Text abstraktu česky}
+\nastavabstrakten{Text of the abstract}
+\nastavklicovaslovacz{Přehled klíčových slov}
+\nastavklicovaslovaen{Some keywords}
+
+% Následující příkaz nastaví standard PDF/A-1b
+\aplikujpdfa
+
+
+% ============================================================================ %
+\begin{document}
+
+\titulnistrana
+
+\zadani
+
+\prohlaseni
+
+\abstraktaklicovaslova
+
+
+% ============================================================================ %
+\clearpage
+\thispagestyle{empty}
+Zde je místo pro případné poděkování, motto, úryvky knih, básní atp.
+
+
+% ============================================================================ %
+\obsah  % Obsah je generován automaticky
+
+
+% ============================================================================ %
+\OdsazovaniOdstavcuStart % Nastaví odsazování odstavců dle zvoleného jazyka
+
+\input{tex/text.tex} % Hlavni text prace
+
+\OdsazovaniOdstavcuStop
+
+% ============================================================================ %
+\seznamlitbib
+
+% ============================================================================ %
+\input{tex/zkratky.tex} % Seznam zkratek
+
+
+% ============================================================================ %
+\seznamobr  % Seznam je generován automaticky
+
+
+% ============================================================================ %
+\seznamtab  % Seznam je generován automaticky
+
+
+\seznamkodu
+
+% ============================================================================ %
+\input{tex/prilohy.tex} % Prilohy
+
+
+% ============================================================================ %
+
+\end{document}
+
+% ============================================================================ %

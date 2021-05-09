@@ -1,0 +1,85 @@
+%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'rolemapper.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{432bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.43402778)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{rolemapper.pdf}}%
+    \put(0.00694444,0.12513351){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+findById($id) : Role\end{tabular}}}}%
+    \put(0.00694444,0.10082795){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+findAll() : Role[]\end{tabular}}}}%
+    \put(0.00694444,0.0765224){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+save($entity)\end{tabular}}}}%
+    \put(0.00694444,0.05221684){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+delete($entity)\end{tabular}}}}%
+    \put(0.00694444,0.02791128){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+getDataSource()\end{tabular}}}}%
+    \put(0.05902778,0.15291128){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{RoleRepository}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{rolemapper.pdf}}%
+    \put(0.00694444,0.35950851){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+findOne($filter) : Role\end{tabular}}}}%
+    \put(0.00694444,0.33520295){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+find($filter) : Role[]\end{tabular}}}}%
+    \put(0.00694444,0.3108974){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+findAll() : Role[]\end{tabular}}}}%
+    \put(0.00694444,0.28659184){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}+findRelated(User) : Role[]\end{tabular}}}}%
+    \put(0.06423611,0.41159184){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Interface>>\end{tabular}}}}%
+    \put(0.07465278,0.38728628){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{RoleMapper}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{rolemapper.pdf}}%
+    \put(0.48784722,0.34735573){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}-create() : Role\end{tabular}}}}%
+    \put(0.49479167,0.37513351){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{RoleDbMapper}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{rolemapper.pdf}}%
+    \put(0.890625,0.1077724){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{\textit{Entity}}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{rolemapper.pdf}}%
+    \put(0.85763889,0.34041128){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}#id\end{tabular}}}}%
+    \put(0.85763889,0.31610573){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}#name\end{tabular}}}}%
+    \put(0.85763889,0.29180017){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}#key\end{tabular}}}}%
+    \put(0.89756944,0.36818906){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Role}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{rolemapper.pdf}}%
+    \put(0.55729167,0.12513351){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Dibi\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{rolemapper.pdf}}%
+    \put(0.671875,0.37166128){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<instantiate>>\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

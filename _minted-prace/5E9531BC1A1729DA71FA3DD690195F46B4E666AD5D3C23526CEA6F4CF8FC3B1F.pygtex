@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{public} \PYG{k}{static} \PYG{k}{function} \PYG{n+nf}{createRouter}\PYG{p}{()}\PYG{o}{:} \PYG{n+nx}{RouteList}
+\PYG{p}{\PYGZob{}}
+	\PYG{n+nv}{\PYGZdl{}router} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{RouteList}\PYG{p}{;}
+	\PYG{k}{if} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}\PYGZus{}SERVER}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}SERVER\PYGZus{}NAME\PYGZsq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}admin.volby.l\PYGZsq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{n+nv}{\PYGZdl{}router}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{withModule}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Backend\PYGZsq{}}\PYG{p}{)}
+			\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRoute}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}//admin.\PYGZpc{}domain\PYGZpc{}/prihlasit\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Sign:in\PYGZsq{}}\PYG{p}{)}
+			\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRoute}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}//admin.\PYGZpc{}domain\PYGZpc{}/odhlasit\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Sign:out\PYGZsq{}}\PYG{p}{)}
+			\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRoute}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}//admin.\PYGZpc{}domain\PYGZpc{}/\PYGZlt{}presenter\PYGZgt{}/\PYGZlt{}action\PYGZgt{}[/\PYGZlt{}id\PYGZgt{}]\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Homepage:default\PYGZsq{}}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{k}{if} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}\PYGZus{}SERVER}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}SERVER\PYGZus{}NAME\PYGZsq{}}\PYG{p}{]} \PYG{o}{==} \PYG{l+s+s1}{\PYGZsq{}admin.volby.lukasrichter.eu\PYGZsq{}}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{n+nv}{\PYGZdl{}router}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{withModule}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Backend\PYGZsq{}}\PYG{p}{)}
+			\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRoute}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}//admin.volby.\PYGZpc{}domain\PYGZpc{}/prihlasit\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Sign:in\PYGZsq{}}\PYG{p}{)}
+			\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRoute}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}//admin.volby.\PYGZpc{}domain\PYGZpc{}/odhlasit\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Sign:out\PYGZsq{}}\PYG{p}{)}
+			\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRoute}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}//admin.volby.\PYGZpc{}domain\PYGZpc{}/\PYGZlt{}presenter\PYGZgt{}/\PYGZlt{}action\PYGZgt{}[/\PYGZlt{}id\PYGZgt{}]\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Homepage:default\PYGZsq{}}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{n+nv}{\PYGZdl{}router}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{withModule}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Frontend\PYGZsq{}}\PYG{p}{)}
+		\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRoute}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}/prihlasit\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Sign:in\PYGZsq{}}\PYG{p}{)}
+		\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRoute}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}/odhlasit\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Sign:out\PYGZsq{}}\PYG{p}{)}
+		\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRoute}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}/\PYGZlt{}presenter\PYGZgt{}/\PYGZlt{}action\PYGZgt{}[/\PYGZlt{}id\PYGZgt{}]\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}Homepage:default\PYGZsq{}}\PYG{p}{);}
+	\PYG{k}{return} \PYG{n+nv}{\PYGZdl{}router}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

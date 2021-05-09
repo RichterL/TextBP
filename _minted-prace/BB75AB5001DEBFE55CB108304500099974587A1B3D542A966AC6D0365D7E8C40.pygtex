@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{withModule}\PYG{p}{(}\PYG{n+nx}{string} \PYG{n+nv}{\PYGZdl{}module}\PYG{p}{)}
+\end{Verbatim}

@@ -1,0 +1,31 @@
+Jednou ze změn, které se objevily jako vhodné v průběhu vývoje bylo rozdělení aplikace na dvě části, v kontextu Content Management Systémů běžně označované jako Frontend a Backend. Tyto dvě části by na sobě měly být nezávislé, tedy jedna nepotřebuje vědět o (ne)existenci té druhé a umí svoje úkoly provést zcela samostatně. Frontend představuje tu část, která je veřejně dostupná, Backend označuje neveřejné administrační rozhraní aplikace. Tohoto rozdělení se zároveň využilo ke zvýšení bezpečnosti aplikace, jak je vysvětleno v části \ref{section:fyzickeOddeleni}.
+
+Zjednodušená adresářová struktura je zobrazena v příloze \ref{priloha:adresare}. V adresáři \phpinline{app/} se nachází zdrojové kódy rozdělené podle jejich účelu. Presentery jsou společně se šablonami v příslušných adresářích (Backend, Frontend a Core). Core obsahuje presentery společné pro Frontend i Backend, což jsou momentálně pouze presentery pro zpracování chybových hlášení. Jednotlivé adresáře jsou popsány níže.
+\begin{itemize}
+	\item  \textbf{Backend} - obsahuje Presentery, šablony a pomocné třídy využité v Backendové části
+	\item \textbf{Config} - konfigurační soubory aplikace
+	\item \textbf{Core} - obsahuje Presentery, šablony a pomocné třídy využité napříč celou aplikací
+	\item \textbf{Forms} - definice a továrny pro složitější formuláře
+	\item \textbf{Frontend} - obsahuje Presentery a šablony využité ve Frontendové části
+	\item \textbf{Models} - obsahuje modelovou vrstvu
+	\item \textbf{Repositories} - všechny repozitáře pro komunikaci s modelovou vrstvou
+	\item \textbf{Router} - definice routování
+\end{itemize}
+
+\n{3}{Fyzické oddělení} \label{section:fyzickeOddeleni}
+Prvním krokem zabezpečení neveřejné části webu je samozřejmě omezení přístupu heslem přímo v aplikaci. Přihlašovací formulář je nicméně stále veřejný a kdokoli s odkazem na přihlašovací stránku se může pokoušet o přihlášení. Druhým krokem tedy může být omezení přístupu pomocí IP adres (například pouze na adresy vnitřní sítě UTB) a to pomocí nastavení HTTP serveru souborem \tt{.htaccess} nebo v konfiguraci \tt{virtualhost}. Toto nastavení je přenecháno ke zvážení tomu, kdo bude zodpovědný za instalaci a nastavení serveru.
+
+Aby veškeré odkazy v aplikaci fungovaly a aby Nette vědělo kam má směřovat požadavky, bylo potřeba upravit základní routování popsané v části \ref{section:routovani}. Routy podporují tzv. moduly, které slouží přesně k takovému rozdělení aplikace na několik oddělených částí. Pro každý modul je možné definovat vlastní routy, seskupení rout do modulů se provádí voláním metody \phpinline{withModule(string $module)} %$ 
+třídy \phpinline{RouteList}. 
+
+Rozšířené nastavení routování je patrné z výňatku kódu \ref{php:newRoute}. Obsahuje nastavení pro lokální testování (admin.volby.l) i simulaci produkčního prostředí na VPS serveru v internetu (admin.volby.lukasrichter.eu). Pro Backendový modul bylo potřeba rozlišit jednotlivá prostředí podle názvu serveru kvůli použití domény čtvrtého řádu, se kterou si Router neporadil. Pro Frontendový modul toto nebylo potřeba, doména třetího řádu (volby.lukasrichter.eu) fungovala v pořádku. Zápis \phpinline{addRoute('/prihlasit', 'Sign:in')} definuje alias pro akci \tt{in} presenteru \tt{SignPresenter}, která je standardně dostupná pod adresou \tt{/sign/in}.
+
+\begin{listing}[ht]
+\phpsnippet{tex/code/newRoute.php}
+\caption{Upravená routa v Nette}
+\label{php:newRoute}
+\end{listing}
+
+S tímto nastavením jsou jednotlivé části aplikace dostupné ze samostaných domén (např. admin.volby.utb.cz a volby.utb.cz), které nemusí být fyzicky na stejném serveru. Právě toto dokáže podstatně zvýšit bezpečnost aplikace. Frontendová část (volby.utb.cz) je umístěna na bežném veřejně přístupném serveru, zatímco Backendová část je umístěna na serveru, který nemusí být vůbec dostupný z internetu. Samozřejmě může být rozdílná i samotná doména nižšího řádu, za předpokladu, že jsou správně nastaveny DNS záznamy.
+
+A jelikož jsou obě části na sobě nezávislé, není nutné na veřejně dostupném Frontendu umisťovat Backendový kód, který obsahuje například zpracování, dešifrování a počítání odevzdaných hlasů, ale i aktivaci a mazání celých voleb. V případě útoku na aplikaci s cílem kompromitovat nebo ovlivnit volby, nemají útočníci možnost tento kód spustit. Museli by tedy útočit přímo na databázový server, jehož zabezpečení je v komptenci administrátora serveru.

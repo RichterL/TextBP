@@ -1,0 +1,27 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{abstract} \PYG{k}{class} \PYG{n+nc}{BasePresenter} \PYG{k}{extends} \PYG{n+nx}{Nette\PYGZbs{}Application\PYGZbs{}UI\PYGZbs{}Presenter}
+\PYG{p}{\PYGZob{}}
+	\PYG{k}{public} \PYG{k}{function} \PYG{n+nf}{checkRequirements}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}element}\PYG{p}{)}\PYG{o}{:} \PYG{n+nx}{void}
+	\PYG{p}{\PYGZob{}}
+		\PYG{o}{...}
+		
+		\PYG{k}{if} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}element} \PYG{n+nx}{instanceof} \PYG{n+nx}{Nette\PYGZbs{}Application\PYGZbs{}UI\PYGZbs{}MethodReflection} \PYG{o}{\PYGZam{}\PYGZam{}} \PYG{n+nv}{\PYGZdl{}element}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{hasAnnotation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}restricted\PYGZsq{}}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+			\PYG{n+nv}{\PYGZdl{}resource} \PYG{o}{=} \PYG{n+nv}{\PYGZdl{}element}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{getAnnotation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}resource\PYGZsq{}}\PYG{p}{);}
+			\PYG{n+nv}{\PYGZdl{}privilege} \PYG{o}{=} \PYG{n+nv}{\PYGZdl{}element}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{getAnnotation}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}privilege\PYGZsq{}}\PYG{p}{);}
+			\PYG{k}{if} \PYG{p}{(}\PYG{o}{!}\PYG{n+nv}{\PYGZdl{}user}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{isAllowed}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}resource}\PYG{p}{,} \PYG{n+nv}{\PYGZdl{}privilege}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+				\PYG{n+nv}{\PYGZdl{}this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{flashMessage}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}You do not have permission to do that\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}warning\PYGZsq{}}\PYG{p}{);}
+				\PYG{k}{if} \PYG{p}{(}\PYG{o}{!}\PYG{n+nv}{\PYGZdl{}user}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{isAllowed}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}resource}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}view\PYGZsq{}}\PYG{p}{))} \PYG{p}{\PYGZob{}}
+					\PYG{n+nv}{\PYGZdl{}this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{redirect}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}Homepage:\PYGZsq{}}\PYG{p}{);}
+				\PYG{p}{\PYGZcb{}}
+				\PYG{k}{if} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{isAjax}\PYG{p}{())} \PYG{p}{\PYGZob{}}
+					\PYG{n+nv}{\PYGZdl{}this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{forward}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}this\PYGZsq{}}\PYG{p}{);}
+				\PYG{p}{\PYGZcb{}} \PYG{k}{else} \PYG{p}{\PYGZob{}}
+					\PYG{n+nv}{\PYGZdl{}this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{forward}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}:default\PYGZsq{}}\PYG{p}{);}
+				\PYG{p}{\PYGZcb{}}
+			\PYG{p}{\PYGZcb{}}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+	
+	\PYG{o}{...}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

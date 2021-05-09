@@ -1,0 +1,92 @@
+%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ElectionUseCase2.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{641.25bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.66081871)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ElectionUseCase2.pdf}}%
+    \put(0.46984129,0.6454469){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Volební systém\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ElectionUseCase2.pdf}}%
+    \put(0.33066,0.59281532){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Přihlášení\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{ElectionUseCase2.pdf}}%
+    \put(0.34703427,0.50041766){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Volit\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{ElectionUseCase2.pdf}}%
+    \put(0.30492901,0.41035918){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Zobrazit výsledky\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{ElectionUseCase2.pdf}}%
+    \put(0.30025064,0.3203007){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Nahrát veřejný klíč\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{ElectionUseCase2.pdf}}%
+    \put(0.44644947,0.1460317){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Sečíst hlasy\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{ElectionUseCase2.pdf}}%
+    \put(0.30726819,0.06065158){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Vytvořit protokol\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=8]{ElectionUseCase2.pdf}}%
+    \put(0.29908105,0.23024222){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Nahrát privatní klíč\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=9]{ElectionUseCase2.pdf}}%
+    \put(0.62890561,0.59281532){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Vytvořit volby\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=10]{ElectionUseCase2.pdf}}%
+    \put(0.60434421,0.38228901){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Nahrát seznam voličů\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=11]{ElectionUseCase2.pdf}}%
+    \put(0.62305766,0.48755216){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Aktivovat volby\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=12]{ElectionUseCase2.pdf}}%
+    \put(0.60902257,0.27702585){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Spravovat uživatele\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=13]{ElectionUseCase2.pdf}}%
+    \put(0.60668339,0.17176269){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Spravovat oprávnění\end{tabular}}}}%
+    \put(0.83709275,0.15889719){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Administrátor systému\end{tabular}}}}%
+    \put(0.84761906,0.44661649){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Administrátor voleb\end{tabular}}}}%
+    \put(0.01370094,0.28053462){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Zaměstnanec\end{tabular}}}}%
+    \put(0.16223895,0.28053462){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Student\end{tabular}}}}%
+    \put(0.07451965,0.08053462){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Volební komise\end{tabular}}}}%
+    \put(0.10726819,0.45597322){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Volič\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=14]{ElectionUseCase2.pdf}}%
+    \put(0.42071848,0.10041766){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Extend>>\end{tabular}}}}%
+    \put(0.4300752,0.19749368){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}<<Include>>\end{tabular}}}}%
+  \end{picture}%
+\endgroup%

@@ -1,0 +1,22 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{k}{public} \PYG{k}{function} \PYG{n+nf}{create}\PYG{p}{()}\PYG{o}{:} \PYG{n+nx}{Authorizator}
+\PYG{p}{\PYGZob{}}
+	\PYG{n+nv}{\PYGZdl{}authorizator} \PYG{o}{=} \PYG{k}{new} \PYG{n+nx}{Permission}\PYG{p}{();}
+	\PYG{k}{foreach} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{resourceRepository}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{findAll}\PYG{p}{()} \PYG{k}{as} \PYG{n+nv}{\PYGZdl{}resource}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{n+nv}{\PYGZdl{}authorizator}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addResource}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}resource}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{key}\PYG{p}{,} \PYG{n+nv}{\PYGZdl{}resource}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{parent}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{key} \PYG{o}{??} \PYG{k}{null}\PYG{p}{);}
+	\PYG{p}{\PYGZcb{}}
+	\PYG{k}{foreach} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}this}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{roleRepository}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{findAll}\PYG{p}{(}\PYG{k}{true}\PYG{p}{)} \PYG{k}{as} \PYG{n+nv}{\PYGZdl{}role}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+		\PYG{n+nv}{\PYGZdl{}authorizator}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{addRole}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}role}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{key}\PYG{p}{,} \PYG{n+nv}{\PYGZdl{}role}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{parent}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{key} \PYG{o}{??} \PYG{k}{null}\PYG{p}{);}
+		\PYG{n+nv}{\PYGZdl{}rules} \PYG{o}{=} \PYG{n+nv}{\PYGZdl{}role}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{rules}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{getByTypes}\PYG{p}{();}
+		\PYG{k}{foreach} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}rules} \PYG{k}{as} \PYG{n+nv}{\PYGZdl{}type} \PYG{o}{=\PYGZgt{}} \PYG{n+nv}{\PYGZdl{}ruleResources}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+			\PYG{k}{foreach} \PYG{p}{(}\PYG{n+nv}{\PYGZdl{}ruleResources} \PYG{k}{as} \PYG{n+nv}{\PYGZdl{}ruleResource} \PYG{o}{=\PYGZgt{}} \PYG{n+nv}{\PYGZdl{}rulePrivileges}\PYG{p}{)} \PYG{p}{\PYGZob{}}
+				\PYG{n+nv}{\PYGZdl{}authorizator}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+nv}{\PYGZdl{}type}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}role}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{key}\PYG{p}{,} \PYG{n+nv}{\PYGZdl{}ruleResource}\PYG{p}{,} \PYG{n+nv}{\PYGZdl{}rulePrivileges}\PYG{p}{);}
+			\PYG{p}{\PYGZcb{}}
+		\PYG{p}{\PYGZcb{}}
+	\PYG{p}{\PYGZcb{}}
+
+	\PYG{c+c1}{// allow all resources and privileges for superAdmin}
+	\PYG{n+nv}{\PYGZdl{}authorizator}\PYG{o}{\PYGZhy{}\PYGZgt{}}\PYG{n+na}{allow}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}superAdmin\PYGZsq{}}\PYG{p}{);}
+	\PYG{k}{return} \PYG{n+nv}{\PYGZdl{}authorizator}\PYG{p}{;}
+\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

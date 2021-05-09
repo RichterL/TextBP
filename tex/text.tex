@@ -1,0 +1,95 @@
+% ============================================================================ %
+% Encoding: UTF-8 (žluťoučký kůň úpěl ďábelšké ódy)
+% ============================================================================ %
+
+% ============================================================================ %
+\nn{Úvod}
+První řádek prvního odstavce v kapitole či podkapitole se neodsazuje, ostatní ano. Vertikální odsazení mezy odstavci je typycké pro anglickou sazbu; czech babel toto respektuje, netřeba do textu přidávat jakékoliv explicitní formátování, viz ukázka sazby tohoto textu s následujícím odstavcem).
+
+Formátování druhého odstavce. Text text text text text text text text text text text text.
+
+
+% ============================================================================ %
+\cast{Teoretická část}
+
+\n{1}{Elektronické volby}
+Na této stránce je k vidění způsob tvorby různých úrovní nadpisů.
+
+\n{2}{Koncepce, výhody, nevýhody}
+Text
+
+\n{2}{Poždadvky, podmínky}
+Text
+
+\n{2}{RSA Blind Signature}
+Text
+
+\n{1}{Požadavky na funkčnost}
+Níže následují ukázky vložení obrázku, tabulky a různorodých citací.
+
+
+\n{2}{Obecné požadavky}
+
+\n{2}{Specifika provozu na UTB}
+
+\n{2}{Navrhované řešení}
+
+\n{1}{Návrh aplikace}
+Jádrem celé aplikace byl zvolen PHP framework Nette od českého vývojáře Davida Grudla. 
+V konkurenci světových frameworků jako je Laravel nebo Symfony je velice oblíbený především v českém prostředí. Zcela jistě i díky kvalitní dokumentaci v češtině, pravidelným aktualizacím i aktivnímu diskuznímu fóru. 
+Nette za velkými hráči rozhodně nezaostává a naopak přináší velice intuitivní způsob tvorby kvalitních, rychlých a bezpečných webových aplikací \cite{Haska2016}.
+
+\n{2}{Architektura MVC}
+\input{tex/chapters/mvc.tex}
+
+\n{2}{Nette framework}
+\input{tex/chapters/nette.tex}
+
+\n{2}{Domain Driven Design}\label{section:DDD}
+\input{tex/chapters/ddd.tex}
+
+\n{2}{Entity}\label{section:Entity}
+\input{tex/chapters/navrhModelu.tex}
+
+\n{2}{Průchod voliče webem}
+\input{tex/chapters/pruchodWebem.tex}
+
+\cast{Praktická část}
+\n{1}{Implementace návrhu}
+Konkrétní implementace modelu popsaného v teoretické části probíhala postupně a vyvíjela se. Některé způsoby se po čase ukázaly jako nevhodné či nedokonalé a bylo potřeba je upravit resp. přepracovat tak, aby aplikace jako celek byla funkční. Během vývoje aplikace bylo změněno i IDE z Visual Studio Code na PHPstorm, což je místy vidět v rozdílných PHPdoc komentářích zdrojového kódu.
+
+\n{2}{Členění aplikace}
+\input{tex/chapters/cleneni.tex}
+\clearpage
+
+\n{2}{Struktura databáze}
+\input{tex/chapters/modelovaVrstva.tex}
+
+\clearpage
+\n{2}{Přihlašovaní a autentizace} \label{section:prihlasovani}
+\input{tex/chapters/prihlasovani.tex}
+
+\clearpage
+\n{2}{Oprávnění a autorizace}
+\input{tex/chapters/opravneni.tex}
+
+\clearpage
+\n{2}{Presentery}
+\input{tex/chapters/presentery.tex}
+
+\n{2}{Zpracování hlasovacích lístků} \label{section:zpracovaniHlasu}
+
+\n{2}{Další části aplikace}
+
+\n{3}{Datagridy} \label{section:Datagridy}
+Zkráceně gridy, tyto interaktivní tabulky umožňují kromě zobrazení dat i jejich filtraci, stránkování, akce nad řádkem tabulky (např. odkaz směřující na Signál) a mnoho dalších funkcí. Gridy přijímají data jako objekt \phpinline{Datasource}, který může obsahovat data ve formě obyčejného pole nebo dotazu SQL \cite{ContributteDataGrid}. Kromě jednoho případu v této aplikaci vždy pracují s SQL dotazem. Výhoda tohoto přístupu je minimalizování potřebného objemu dat k zobrazení gridu. Po změně filtrace nebo stránky je vždy upraven SQL dotaz a až následně odeslán na databázový server, filtrace a stránkování tedy probíhá přímo na SQL serveru, nikoli pomocí PHP nebo JavaScriptu.
+
+Akce nad řádkem jsou typicky úlohy typu editace, mazání zobrazení detailu a směřují na Signál presenteru (metody handle). Jsou reprezentovány ikonami. Požadavek na vymazání řádku (záznamu) je navíc opatřen potvrzovacím dialogovým oknem, aby nedošlo k nechtěnému smazání při nechtěném kliknutí.
+
+
+% ============================================================================ %
+\nn{Závěr}
+Text závěru.
+
+% ============================================================================ %
+

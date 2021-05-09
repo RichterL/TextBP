@@ -1,0 +1,78 @@
+%% Creator: Inkscape inkscape 0.92.5, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'ElectionModel3.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \newcommand*\fsize{\dimexpr\f@size pt\relax}%
+  \newcommand*\lineheight[1]{\fontsize{\fsize}{#1\fsize}\selectfont}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{343.5bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.98908297)%
+    \lineheight{1}%
+    \setlength\tabcolsep{0pt}%
+    \put(0,0){\includegraphics[width=\unitlength,page=1]{ElectionModel3.pdf}}%
+    \put(0.44978166,0.91703057){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}Election\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{ElectionModel3.pdf}}%
+    \put(0.11572052,0.53930131){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Election}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=3]{ElectionModel3.pdf}}%
+    \put(0.65502183,0.53930131){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Question}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=4]{ElectionModel3.pdf}}%
+    \put(0.66593886,0.21179039){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Answer}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=5]{ElectionModel3.pdf}}%
+    \put(0.13100437,0.21179039){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Voter}\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=6]{ElectionModel3.pdf}}%
+    \put(0.12882096,0.86681223){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}\textbf{Ballot}\end{tabular}}}}%
+    \put(0.19213974,0.40829694){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.13318777,0.24454148){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}*\end{tabular}}}}%
+    \put(0.73799127,0.40829694){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.6790393,0.24454148){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}*\end{tabular}}}}%
+    \put(0.13100437,0.5720524){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.19432314,0.73580786){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}*\end{tabular}}}}%
+    \put(0.31659389,0.51746725){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}1\end{tabular}}}}%
+    \put(0.55676856,0.47161572){\makebox(0,0)[lt]{\lineheight{1.25}\smash{\begin{tabular}[t]{l}*\end{tabular}}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=7]{ElectionModel3.pdf}}%
+  \end{picture}%
+\endgroup%

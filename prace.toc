@@ -1,0 +1,55 @@
+\babel@toc {czech}{}
+\contentsline {section}{\IeC {\'U}vod}{9}{section*.3}%
+\contentsline {section}{\texorpdfstring {\makebox [0.85cm]{I\hfill } Teoretick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{I\ Teoretick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}}{10}{part.1}%
+\contentsline {section}{\numberline {1}Elektronick\IeC {\'e} volby}{11}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Koncepce, v\IeC {\'y}hody, nev\IeC {\'y}hody}{11}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Po\IeC {\v z}dadvky, podm\IeC {\'\i }nky}{11}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}RSA Blind Signature}{11}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Po\IeC {\v z}adavky na funk\IeC {\v c}nost}{12}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Obecn\IeC {\'e} po\IeC {\v z}adavky}{12}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Specifika provozu na UTB}{12}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Navrhovan\IeC {\'e} \IeC {\v r}e\IeC {\v s}en\IeC {\'\i }}{12}{subsection.2.3}%
+\contentsline {section}{\numberline {3}N\IeC {\'a}vrh aplikace}{13}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Architektura MVC}{13}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Nette framework}{13}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}T\IeC {\v r}\IeC {\'\i }da Presenter}{14}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Routov\IeC {\'a}n\IeC {\'\i }}{15}{subsubsection.3.2.2}%
+\contentsline {paragraph}{\itshape \bfseries {Latte}}{15}{section*.7}%
+\contentsline {subsection}{\numberline {3.3}Domain Driven Design}{15}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Entity}{17}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Pr\IeC {\r u}chod voli\IeC {\v c}e webem}{20}{subsection.3.5}%
+\contentsline {section}{\texorpdfstring {\makebox [0.85cm]{II\hfill } Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}{II\ Praktick\IeC {\'a} \IeC {\v c}\IeC {\'a}st}}{21}{part.2}%
+\contentsline {section}{\numberline {4}Implementace n\IeC {\'a}vrhu}{22}{section.4}%
+\contentsline {subsection}{\numberline {4.1}\IeC {\v C}len\IeC {\v e}n\IeC {\'\i } aplikace}{22}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Fyzick\IeC {\'e} odd\IeC {\v e}len\IeC {\'\i }}{23}{subsubsection.4.1.1}%
+\contentsline {subsection}{\numberline {4.2}Struktura datab\IeC {\'a}ze}{25}{subsection.4.2}%
+\contentsline {section}{\numberline {5}Implementace n\IeC {\'a}vrhu}{26}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Modelov\IeC {\'a} vrstva}{26}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}P\IeC {\v r}ihla\IeC {\v s}ovan\IeC {\'\i } a autentizace}{28}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Opr\IeC {\'a}vn\IeC {\v e}n\IeC {\'\i } a autorizace}{30}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Presentery}{33}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}Frontend}{33}{subsubsection.5.4.1}%
+\contentsline {paragraph}{SignPresenter}{33}{section*.15}%
+\contentsline {paragraph}{BasePresenter}{34}{section*.17}%
+\contentsline {paragraph}{HomePagePresenter}{34}{section*.18}%
+\contentsline {paragraph}{VotingPresenter}{34}{section*.19}%
+\contentsline {paragraph}{ResultsPresenter}{35}{section*.20}%
+\contentsline {subsubsection}{\numberline {5.4.2}Backend}{35}{subsubsection.5.4.2}%
+\contentsline {paragraph}{SignPresenter}{35}{section*.22}%
+\contentsline {paragraph}{BasePresenter}{36}{section*.23}%
+\contentsline {paragraph}{HomepagePresenter}{36}{section*.24}%
+\contentsline {paragraph}{ElectionsPresenter}{36}{section*.25}%
+\contentsline {paragraph}{ElectionPresenter}{36}{section*.26}%
+\contentsline {paragraph}{UsersPresenter}{37}{section*.27}%
+\contentsline {paragraph}{RolesPresenter}{37}{section*.28}%
+\contentsline {paragraph}{ResourcesPresenter}{37}{section*.29}%
+\contentsline {subsubsection}{\numberline {5.4.3}Core}{38}{subsubsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.5}Zpracov\IeC {\'a}n\IeC {\'\i } hlasovac\IeC {\'\i }ch l\IeC {\'\i }stk\IeC {\r u}}{38}{subsection.5.5}%
+\contentsline {subsection}{\numberline {5.6}Dal\IeC {\v s}\IeC {\'\i } \IeC {\v c}\IeC {\'a}sti aplikace}{38}{subsection.5.6}%
+\contentsline {subsubsection}{\numberline {5.6.1}Datagridy}{38}{subsubsection.5.6.1}%
+\contentsline {section}{Z\IeC {\'a}v\IeC {\v e}r}{39}{section*.30}%
+\contentsline {section}{Seznam pou\IeC {\v z}it\IeC {\'e} literatury }{40}{section*.32}%
+\contentsline {section}{Seznam pou\IeC {\v z}it\IeC {\'y}ch symbol\IeC {\r u} a zkratek}{41}{section*.34}%
+\contentsline {section}{Seznam obr\IeC {\'a}zk\IeC {\r u}}{42}{section*.36}%
+\contentsline {section}{Seznam tabulek}{43}{section*.37}%
+\contentsline {section}{Seznam p\IeC {\v r}\IeC {\'\i }loh}{45}{section*.40}%

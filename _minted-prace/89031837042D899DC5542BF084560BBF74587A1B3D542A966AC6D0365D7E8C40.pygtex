@@ -1,0 +1,3 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{n+nx}{User}\PYG{o}{::}\PYG{n+na}{login}\PYG{p}{(}\PYG{n+nv}{\PYGZdl{}username}\PYG{p}{,} \PYG{n+nv}{\PYGZdl{}password}\PYG{p}{)}
+\end{Verbatim}

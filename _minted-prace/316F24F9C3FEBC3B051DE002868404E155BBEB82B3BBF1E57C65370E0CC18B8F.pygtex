@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{l+s+sd}{/**}
+\PYG{l+s+sd}{ * @restricted}
+\PYG{l+s+sd}{ * @resource(elections)}
+\PYG{l+s+sd}{ * @privilege(delete)}
+\PYG{l+s+sd}{ */}
+\PYG{k}{public} \PYG{k}{function} \PYG{n+nf}{handleDelete}\PYG{p}{(}\PYG{n+nx}{int} \PYG{n+nv}{\PYGZdl{}id}\PYG{p}{)}\PYG{o}{:} \PYG{n+nx}{void} \PYG{p}{\PYGZob{}} \PYG{o}{...} \PYG{p}{\PYGZcb{}}
+\end{Verbatim}
