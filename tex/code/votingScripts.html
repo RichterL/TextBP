@@ -1,0 +1,12 @@
+<script src="/js/crypto/jsbn@latest.js"></script>
+<script src="/js/crypto/js-sha256@latest.js"></script>
+<script type="module">
+	naja.registerExtension(new ValidateVotingForm());
+	import Crypto from '/js/crypto.js'
+	window.crypt = new Crypto({
+		publicEncryptionKeyLink: {link getPublicEncryptionKey!},
+		publicSigningKeyLink: {link getPublicSigningKey!},
+		signingLink: {link blindSign!},
+		savingLink: {link save!}
+	});
+</script>

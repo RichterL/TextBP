@@ -1,10 +1,56 @@
-\n{2}{Odesílání hlasů}
-\n{3}{Zpracování na straně klienta}
+Hlasovací lístek je na straně klienta (voliče) reprezentován formulářem. Tento formulář je generován v Nette na základě specifikací nastavených pro dané volby. Každý hlasovací lístek musí obsahovat nejméně jednu otázku. Otázka obsahuje několik odpovědí a limit pro nejmenší a největší povolený počet zvolených odpovědí. Otázka může být také označena jako povinná.
 
-\n{3}{Zpracování na straně serveru}
+Z výše uvedeného vyplývá, že formulář je potřeba validovat - zjistit, že odpovědi uvedené na hlasovacím lístku odpovídají specifikacím voleb. Nette umožňuje pravidla validace nastavit již při vytváření formuláře a po jeho odeslání klientem je formulář zvalidován na straně serveru. Neúspěšná validace přeruší zpracování formuláře a klientovi poskytne zpětnou vazbu (chybové zprávy). Pokud je načtena JavaScriptová knihovna \texttt{netteForms.js}, provádí se validace navíc i na straně klienta \cite{NetteForms}.
 
-\n{2}{Ukládání hlasů}
+Pokud by byl hlasovací lístek odeslán serveru k validaci, byla by narušena anonymita voleb. A to i v případě, že by server jen ověřil, že počet odpovědí odpovídá nastaveným limitům. Data by server měl k dispozici nešifrovaná a stejně tak identitu voliče, kdokoli by mohl vznést oprávněnou námitku, že takto není zaručena absolutní anonymita voliče. Validace formuláře z tohoto důvodu probíha pouze na straně klienta - v prohlížeči.
 
-\n{2}{Počítání hlasů}
+Ve fragmentu \ref{php:validaceSkripty} jsou vidět skripty a balíčky, které jsou využívány pro validaci a šifrování hlasovacích lístků na straně klienta. Třída \texttt{Crypto} obsahuje metody pro šifrování dat a komunikaci se serverem za účelem výměny klíčů, z tohoto důvodu jsou ji předávány odkazy na signály presenteru.
+
+\begin{listing}[ht]
+\htmlsnippet{tex/code/votingScripts.html}
+\caption{JavaScript použitý při hlasování}
+\label{php:validaceSkripty}
+\end{listing}
+
+\clearpage
+\n{2}{Validace}
+Validace formuláře na straně klienta je všeobecně považována za pouhé usnadnění pro uživatele, umožňuje rychle a přehledně uživatele informovat o nesrovnalostech ve formuláři. Nicméně, veškerá data přijatá od klienta (prohlížeče) by měla být považována za potenciálně nebezpečná a nevalidní, jelikož upravit data před odesláním nebo upravit JavaScriptové validační skripty není nemožné. \cite{Validace1}\cite{Validace2}\cite{Validace3}
+
+Je nutné tedy počítat s tím, že data jsou validována již na straně klienta, ale pouze pro potřeby voliče - aby mu byly přehledně komunikovány jakékoli chyby, kterých se během vyplňování hlasovacího lístku dopustil. Na server se data dostanou zašifrována a nebylo by již možné ověřit jejich platnost. To by mohlo snadno vyústit ve vysoké procento neplatných hlasů a v horším případě četným námitkám proti platnosti voleb samotných. Nutnost validovat data na straně serveru nicméně zůstává, pouze se odkládá na dobu, kdy budou data serverem čitelná - sčítání hlasů.
+
+Po vyplnění formuláře a kliknutí na potvrzovací tlačítko následuje série dílčích kroků, které vedou k odeslání zašifrovaného hlasovacího lístku nebo prezentaci chybových hlášení.
+
+\obr{Diagram aktivity validace}{fig:diagramValidace}{1}{svg/validace.eps}
+
+Formulář má nastaveno odesílání pomocí AJAX, událost odeslání formuláře je tedy nejprve zachycena knihovnou Naja. V šabloně je do Naja registrováno rozšíření \texttt{ValidateVotingForm}, což je jedno z vlastních rozšíření zahrnutých v soubrou \texttt{Naja.ext.js}.
+
+Všechna potřebná pravidla pro validaci jsou již nastavena v Nette při generování formuláře a klient má načtenou knihovnu pro validaci formulářů od Nette, k validaci je tedy použita tato knihovna. Bohužel prezentace chyb touto knihovnou není uživatelsky nejpřívětivější, bylo tedy zvoleno validování jednotlivých elementů formuláře samostatně. Pomocí \texttt{HTMLSelectElement.setCustomValidity()} je nevalidním prvkům změněn stav validity, který využívá framework Bootstrap k zobrazení validovaného formuláře (pomocí pseudoelementů \texttt{:valid} a \texttt{:invalid}). V případě, že formulář obsahuje nevalidní prvky, je zobrazena chybová zpráva, zvýrazněny chybné elementy a proces ukončen.
+
+\begin{listing}[ht]
+\jssnippet{tex/code/validace.js}
+\caption{část třídy ValidateVotingForm}
+\label{php:validace}
+\end{listing}
+
+\n{2}{Šifrování}
+Data zvalidovaného formuláře jsou uspořádána do asociativního pole a předána k zašifrování třídě \texttt{Crypto}. Tato třída má ze šablony předány odkazy pro komunikaci se serverem a již po svém instanciování si od serveru vyžádá veřejný klíč volební komise a veřejný podpisový klíč serveru (oba RSA) a vygeneruje nový náhodný klíč AES-GCM (256-bit) a \textit{nonce} (inicializační vektor). Jednotlivé operace jsou prováděny asynchronně na pozadí, uživatele tedy nijak neomezují.
+
+Ve chvíli, kdy je hlas předán třídě Crypto je volební lístek (pole) převeden na JSON řetězec a zašifrován pomocí vygenerovaného AES klíče. Díky použité metodě šifrování je výsledný šifrovaný text pro stejný otevřený text pokaždé jiný. Následně je zašifrován i samotný AES klíč a to RSA klíčem volební komise (s RSA-OAEP výplní). Dále je na sha-256 hash šifrovaného klíče aplikován náhodný faktor zaslepení $r$ podle algoritmu popsaného v části \koment{odkaz na kapitolu}. Zaslepená zpráva je odeslána na server k podpisu.
+
+Server přijímá zaslepenou zprávu, která neobsahuje žádné informace o hlasovacím lístku, jedná se pouze o hash klíče použitého k zašifrování hlasovacího lístku. Aby bylo možné na straně klienta z podepsané zprávy odstranit náhodný faktor $r$, není možné použít žádné výplně. Použitá knihovna \texttt{phpseclib} navíc jako dodatečnou ochranu podpisového klíče proti časovým útokům používá zaslepování, které by rovněž znemožnilo odstranění faktoru $r$, proto nebylo použito \cite{phpseclibBlinding}. Podepsaná zpráva je vrácena zpět klientovi k dalšímu zpracování.
+
+Na straně klienta je z podepsané zprávy odstraněn náhodný faktor $r$ reverzní operací zaslepení. Tím je získán validní podpis původní (nezaslepené) zprávy - zašifrovaného AES klíče. Pomocí veřejného podpisového klíče serveru a hashe zašifrovaného AES klíče je ověřena správnost podpisu. Pokud podpis zprávy odpovídá originálu, na server se odešle k uložení zašifrovaný hlasovací lístek, zašifrovaný AES klíč a podpis.
+
+\obr{Sekvenční diagram šifrování}{fig:diagramSifrovani}{0.6}{svg/sifrovani.eps}
+
+\n{2}{Ukládání}
+
+V tuto chvíli se nabízí dotaz proč aplikovat slepé podepisování, když server, který vystavuje podpis zároveň zpracovává originál zprávy, kterou podepsal. Tento způsob byl zvolen s ohledem na univerzálnost použití. Právě díky slepému podepisování může být k ukládání hlasů použit jiný server zcela nezávislý na zbytku systému. Tento nezávislý server si pomocí veřejného podpisového klíče ověří, že zprává (hlasovací lístek) odpovídá podpisu a je důvěryhodná = podepsaná volebním serverem. Vzhledem k tomu, že se podepisuje pouze hash, je možné připojit i samotná data hlasovacího lístku, nezávislý server by tedy přijímal pouze zprávu a její podpis. Není to nicméně nutností, protože zašifrovaná data mohou být dešifrována pouze jedním klíčem a ten je ověřený volebním serverem.
+
+Po přijetí dat k uložení tedy server opět ověří že přijatý zašifrovaný AES klíč odpovídá podpisu, který ho provází. Následně vytvoří entitu \texttt{EncryptedBallot} a nastaví ji přijatá data a předá repozitáři k uložení. Jak bylo řečeno výše, ověření a uložení přijatých dat může provést i jakákoli důvěryhodná třetí strana.
+
+\n{2}{Sčítání}
+
+
 
 \n{2}{Výsledky}
