@@ -10,30 +10,11 @@ Formátování druhého odstavce. Text text text text text text text text text t
 
 
 % ============================================================================ %
+
 \cast{Teoretická část}
 
-\n{1}{Elektronické volby}
-Na této stránce je k vidění způsob tvorby různých úrovní nadpisů.
-
-\n{2}{Koncepce, výhody, nevýhody}
-Text
-
-\n{2}{Poždadvky, podmínky}
-Text
-
-\n{2}{RSA Blind Signature}
-Text
-
-\n{1}{Požadavky na funkčnost}
-Níže následují ukázky vložení obrázku, tabulky a různorodých citací.
-
-
-\n{2}{Obecné požadavky}
-
-\n{2}{Specifika provozu na UTB}
-
-\n{2}{Navrhované řešení}
-
+\input{tex/chapters/elektronickeVolby.tex}
+%\begin{comment}
 \n{1}{Návrh aplikace}
 Jádrem celé aplikace byl zvolen PHP framework Nette od českého vývojáře Davida Grudla. 
 V konkurenci světových frameworků jako je Laravel nebo Symfony je velice oblíbený především v českém prostředí. Zcela jistě i díky kvalitní dokumentaci v češtině, pravidelným aktualizacím i aktivnímu diskuznímu fóru. 
@@ -80,7 +61,7 @@ Konkrétní implementace modelu popsaného v teoretické části probíhala post
 \n{1}{Zpracování hlasovacích lístků} \label{section:zpracovaniHlasu}
 Nejcitlivější částí aplikace je bez pochyb právě práce s hlasovacími lístky, proto jí byla věnována samostatná část.
 \input{tex/chapters/zpracovaniHlasu.tex}
-
+%\end{comment}
 
 
 % ============================================================================ %
