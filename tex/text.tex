@@ -4,21 +4,31 @@
 
 % ============================================================================ %
 \nn{Úvod}
-První řádek prvního odstavce v kapitole či podkapitole se neodsazuje, ostatní ano. Vertikální odsazení mezy odstavci je typycké pro anglickou sazbu; czech babel toto respektuje, netřeba do textu přidávat jakékoliv explicitní formátování, viz ukázka sazby tohoto textu s následujícím odstavcem).
+V době rapidního rozvoje technologií, kdy se digitalizuje kde co a prakticky vše je na dosah ruky díky internetu a mobilním telefonům, se stále více aspektů života přesouvá na obrazovky v komfortu našich domovů. Týká se to například i vyřizování oficiálních záležitostí a komunikace se státní správou. Velkou výzvou je ovšem přenést jeden ze základních pilířů demokracie - volby - co nejblíže k voliči. Dostupnost voleb v internetovém prohlížeči nemusí být jen o komfortu, což dokládá aktuální pandemie Covid-19. V současné situaci by takovou možnost jistě uvítal nejeden volič.
 
-Formátování druhého odstavce. Text text text text text text text text text text text text.
+Cílem této práce je vytvořit funkční webovou aplikaci umožňující provozovat volby do akademických senátů Univerzity Tomáše Bati ve Zlíně, která bude uživatelsky přívětivá a zároveň bezpečná. V teoretické části budou prozkoumány obecné požadavky elektronických voleb, které by aplikace měla splňovat. Na základě stanovených požadavků a zvolené kryptografické metody zajišťující anonymitu voleb pak bude postupně navrhována aplikace.
 
+Dále je představen architektonický vzor Model View Controller a framework Nette, se kterým mám praktické zkušenosti. Teoretickou část práce tvoří převážně abstraktní návrh aplikace, která byla od začátku tvořena s ohledem na jednoduchost budoucích úprav. Aplikace podobného typu by z pohledu zdrojového kódu a struktury měla být přehledná a její údržba a rozšiřování snadné. I z tohoto důvodu bylo při modelování i implementaci dbáno na co nejlepší dodržení zásad Domain Driven Designu.
+
+V praktické části jsou detailněji popsány jednotlivé části aplikace a jejich funkce a vzájemné provázání. Nejpodstatnější a pravděpodobně i nejzajímavější částí je způsob zpracování a nakládání s hlasovacími lístky, kterému je věnován závěr práce.
+
+Téma práce bylo navrženo vedoucím práce, jako možné řešení voleb na půdě UTB, jelikož vlastní aplikací nedisponuje. Vzhledem k osobním zkušenostem s programováním webových aplikací mě tato výzva zaujala především možností vytvořit aplikaci od návrhu až po její finální implementaci. Aplikace zároveň není pouze teoretickým příkladem, ale řešením reálného problému, který by mohl být uplatněn v praxi.
 
 % ============================================================================ %
 
 \cast{Teoretická část}
-
+\n{1}{Elektronické volby}
 \input{tex/chapters/elektronickeVolby.tex}
+
+\n{1}{Požadavky na funkčnost}\label{section:pozadavkyCele}
+\input{tex/chapters/pozadavky.tex}
+
 %\begin{comment}
 \n{1}{Návrh aplikace}
 Jádrem celé aplikace byl zvolen PHP framework Nette od českého vývojáře Davida Grudla. 
 V konkurenci světových frameworků jako je Laravel nebo Symfony je velice oblíbený především v českém prostředí. Zcela jistě i díky kvalitní dokumentaci v~češtině, pravidelným aktualizacím i aktivnímu diskuznímu fóru. 
 Nette za velkými hráči rozhodně nezaostává a naopak přináší velice intuitivní způsob tvorby kvalitních, rychlých a bezpečných webových aplikací \cite{Haska2016}.
+
 
 \n{2}{Architektura MVC}
 \input{tex/chapters/mvc.tex}
@@ -30,7 +40,6 @@ Nette za velkými hráči rozhodně nezaostává a naopak přináší velice int
 %\clearpage
 \n{2}{Domain Driven Design}\label{section:DDD}
 \input{tex/chapters/ddd.tex}
-
 \clearpage
 \n{2}{Entity}\label{section:Entity}
 \input{tex/chapters/navrhModelu.tex}
@@ -40,7 +49,7 @@ Nette za velkými hráči rozhodně nezaostává a naopak přináší velice int
 
 \cast{Praktická část}
 \n{1}{Implementace návrhu}
-Konkrétní implementace modelu popsaného v teoretické části probíhala postupně a vyvíjela se. Některé způsoby se po čase ukázaly jako nevhodné či nedokonalé a bylo potřeba je upravit resp. přepracovat tak, aby aplikace jako celek byla funkční. Během vývoje aplikace bylo změněno i IDE z Visual Studio Code na PHPstorm, což je místy vidět v rozdílných PHPdoc komentářích zdrojového kódu.
+Konkrétní implementace modelu popsaného v teoretické části probíhala postupně a~vyvíjela se. Některé způsoby se po čase ukázaly jako nevhodné či nedokonalé a bylo potřeba je upravit resp. přepracovat tak, aby aplikace jako celek byla funkční. Během vývoje aplikace bylo změněno i IDE z Visual Studio Code na PHPstorm, což je místy vidět v rozdílných PHPdoc komentářích zdrojového kódu.
 
 \n{2}{Členění aplikace}
 \input{tex/chapters/cleneni.tex}
@@ -66,10 +75,9 @@ Nejcitlivější částí aplikace je bez pochyb právě práce s hlasovacími l
 \input{tex/chapters/zpracovaniHlasu.tex}
 %\end{comment}
 
-
 % ============================================================================ %
 \nn{Závěr}
-Text závěru.
+\input{tex/zaver.tex}
 
 % ============================================================================ %
 

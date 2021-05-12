@@ -1,0 +1,46 @@
+\n{2}{Obecné požadavky}
+Ze zadání práce lze formulovat následující požadavky na aplikaci:
+
+\begin{itemize}
+	\item musí být funkční,
+	\item musí být responzivní - optimalizovaná pro různá zařízení,
+	\item musí být bezpečná.
+\end{itemize}
+
+Dále při návrhu a implementaci aplikace musí být dbáno na dodržování GDPR. K~implementaci aplikace by mělo být využito technologií PHP, relační databáze a~kryptografie.
+
+\n{2}{Specifika provozu na UTB}
+Volební systém představený v této práci je přizpůsoben především pro potřeby provozu na Univerzitě Tomáše Bati (UTB), proto byly do požadavků zahrnuty i další body, specifické pro UTB. 
+
+Zaměstnanci i studenti využívají k přihlašování do různých částí a aplikací UTB jednotný systém autentizace a i volební systém by měl být dostupný bez nutnosti vytvářet nové uživatelské účty. Implementace systému Single Sign-On Shibboleth by byla rozsahem nad rámec této práce, proto bylo po diskuzi s vedoucím práce zvoleno řešení využívající autentizaci přes Active Directory pomocí protokolu LDAP. Systém by neměl klást další požadavky na voliče, jako např. unikátní podpisové certifikáty.
+
+Primární užití tohoto systému směřuje na volby do akademických senátů fakult a~univerzity. Musí tedy být možné pořádat několik samostatných a nezávislých voleb najednou. Mělo by také být možné systém využít pro hlasování v akademických senátech, ale nabízí se i využití pro různé formy dotazníků spokojenosti. Systém by tedy měl umožnit volby / hlasování s více než jednou ``otázkou''.
+
+O výsledku voleb aplikace sestaví protokol a umožní jeho stažení na disk.
+
+\n{2}{Navrhované řešení}
+Na základě analýzy různých systémů byl po konzultaci s vedoucím práce zvolen systém na bázi ``slepého podepisování'' (RSA Blind Signature)\cite{chaum}. Toto řešení uspokojuje požadavek na anonymitu voleb - bod 3 v části \ref{section:pozadavky} - aniž by byl ovlivněn bod 2. Právě splnění prvních tří z těchto požadavků je velice náročné pro většinu jednoduchých volebních systémů \cite{Schneier1996}.
+
+Návrh na nový způsob digitálního podpisu představený D. Chaumem v roce 1983 byl uvažován pro ověřování plateb a princip byl vysvětlen na anonymních volbách. A~právě tyto dva případy jsou nejčastějším využitím slepých podpisů nebo jejich obdoby. 
+
+Chaum na příkladu anonymních voleb ukazuje, jak je možné nechat ověřit vlastní zprávu důvěryhodnou autoritou, aniž by byl prozrazen obsah zprávy samotné.  Volební komisař musí opatřit hlasovací lístek svým vlastnoručním podpisem, zároveň ale nesmí vědět komu volič dává hlas. Volič tedy svůj lístek vloží do propisovací obálky a obálku nechá podepsat komisařem. Jeho podpis se díky propisovací obálce dostane i na hlasovací lístek, volič následně lístek vyjme z obálky a vloží ho do obálky volební, kterou vhodí do urny. Při sčítání hlasů pak komisař může ověřit pravost lístku díky přítomnosti vlastnoručního podpisu \cite{chaum}.
+
+\n{2}{RSA Blind Signature}\label{section:blindSign}
+Implementace slepého podpisu je nejsnazší při použití RSA algoritmu. Ve standardní verzi algoritmu je digitální podpis zprávy $m$ vypočítán jako $m^d\;(mod\,N)$, kde $N$ je modul a $d$ je dešifrovací exponent protokolu RSA. Verze slepého podpisu zavádí \textit{zaslepovací faktor} $r$, kterým je náhodně zvolené číslo nesoudělné s $N$ \cite{chaum}.
+
+Zpráva je k podpisu předána zaslepená tímto faktorem umocněným šifrovacím exponentem $e$, podepisována je tedy zpráva $m'$.
+
+\[ m' = m \cdot r^e\;(mod\,N) \]
+
+Podpis vzniká standardním způsobem, jelikož se ale jedná o podpis zaslepené zprávy, je značena jako $s'$.
+\[ s' = (m')^d \; (mod\,N) \]
+
+Po podepsání zprávy je z podepsané zprávy odstraněno zaslepení inverzní operací a~výsledkem je podepsaný originál zprávy.
+\[ s = s' \cdot r^{-1} \;(mod\,N) \]
+
+Že se skutečně jedná o podpis originální zprávy vyplývá ze samotného protokolu RSA \cite{rsa}.
+\[ s' \cdot r^{-1} = (m')^d \cdot r^{-1} = (m \cdot r^e)^d \cdot r^{-1} = 
+	m^d \cdot r^{ed} \cdot r^{-1} = m^d \cdot r \cdot r^{-1} = m^d = s
+\]
+
+Tento způsob, kdy se podepisuje přímo zpráva, není vhodný - umožňuje útok na~podpis - a místo zprávy $m$ je pracováno s výsledkem kryptografické hašovací funkce (hashí) $H(m)$ \cite{RsaAdventures}.

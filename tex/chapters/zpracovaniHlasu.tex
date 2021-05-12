@@ -1,6 +1,6 @@
 Hlasovací lístek je na straně klienta (voliče) reprezentován formulářem. Tento formulář je generován v Nette na základě specifikací nastavených pro dané volby. Každý hlasovací lístek musí obsahovat nejméně jednu otázku. Otázka obsahuje několik odpovědí a limit pro nejmenší a největší povolený počet zvolených odpovědí. Otázka může být také označena jako povinná.
 
-Z výše uvedeného vyplývá, že formulář je potřeba validovat - zjistit, že odpovědi uvedené na hlasovacím lístku odpovídají specifikacím voleb. Nette umožňuje pravidla validace nastavit již při vytváření formuláře a po jeho odeslání klientem je formulář zvalidován na straně serveru. Neúspěšná validace přeruší zpracování formuláře a~klientovi poskytne zpětnou vazbu (chybové zprávy). Pokud je načtena JavaScriptová knihovna \texttt{netteForms.js}, provádí se validace navíc i na straně klienta \cite{NetteForms}.
+Z výše uvedeného vyplývá, že formulář je potřeba validovat - zjistit, že odpovědi uvedené na hlasovacím lístku odpovídají specifikacím voleb. Nette umožňuje pravidla validace nastavit již při vytváření formuláře a po jeho odeslání klientem je formulář zvalidován na straně serveru. Neúspěšná validace přeruší zpracování formuláře a~klientovi poskytne zpětnou vazbu (chybové zprávy). Pokud je načtena JavaScriptová knihovna \texttt{netteForms.js}, provádí se validace navíc i na straně klienta~\cite{NetteForms}.
 
 Pokud by byl hlasovací lístek odeslán serveru k validaci, byla by narušena anonymita voleb. A to i v případě, že by server jen ověřil, že počet odpovědí odpovídá nastaveným limitům. Data by server měl k dispozici nešifrovaná a stejně tak identitu voliče, kdokoli by mohl vznést oprávněnou námitku, že takto není zaručena absolutní anonymita voliče. Validace formuláře z tohoto důvodu probíha pouze na straně klienta - v prohlížeči.
 
@@ -14,13 +14,19 @@ Ve fragmentu \ref{php:validaceSkripty} jsou vidět skripty a balíčky, které j
 
 \clearpage
 \n{2}{Validace}\label{section:hlasovaniValidace}
-Validace formuláře na straně klienta je všeobecně považována za pouhé usnadnění pro uživatele, umožňuje rychle a přehledně uživatele informovat o nesrovnalostech ve~formuláři. Nicméně, veškerá data přijatá od klienta (prohlížeče) by měla být považována za potenciálně nebezpečná a nevalidní, jelikož upravit data před odesláním nebo upravit JavaScriptové validační skripty není nemožné. \cite{Validace1}\cite{Validace2}\cite{Validace3}
+Validace formuláře na straně klienta je všeobecně považována za pouhé usnadnění pro uživatele, umožňuje rychle a přehledně uživatele informovat o nesrovnalostech ve~formuláři. Nicméně, veškerá data přijatá od klienta (prohlížeče) by měla být považována za potenciálně nebezpečná a nevalidní, jelikož upravit data před odesláním nebo upravit JavaScriptové validační skripty není nemožné \cite{Validace1}\cite{Validace2}\cite{Validace3}.
 
 Je nutné tedy počítat s tím, že data jsou validována již na straně klienta, ale pouze pro potřeby voliče - aby mu byly přehledně komunikovány jakékoli chyby, kterých se během vyplňování hlasovacího lístku dopustil. Na server se data dostanou zašifrována a nebylo by již možné ověřit jejich platnost. To by mohlo snadno vyústit ve vysoké procento neplatných hlasů a v horším případě četným námitkám proti platnosti voleb samotných. Nutnost validovat data na straně serveru nicméně zůstává, pouze se odkládá na dobu, kdy budou data serverem čitelná - sčítání hlasů.
 
 Po vyplnění formuláře a kliknutí na potvrzovací tlačítko následuje série dílčích kroků, které vedou k odeslání zašifrovaného hlasovacího lístku nebo prezentaci chybových hlášení.
 
-\obr{Diagram aktivity validace}{fig:diagramValidace}{1}{svg/validace.eps}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{svg/validace.eps}
+	\captionsetup{width=\linewidth}
+	\caption[Diagram aktivity validace]{Diagram aktivity validace (zdroj: vlastní)}
+	\label{fig:diagramValidace}
+\end{figure}
 
 Formulář má nastaveno odesílání pomocí AJAX, událost odeslání formuláře je tedy nejprve zachycena knihovnou Naja. V šabloně je do Naja registrováno rozšíření \texttt{ValidateVotingForm}, což je jedno z vlastních rozšíření zahrnutých v soubrou \texttt{Naja.ext.js}.
 
@@ -35,13 +41,20 @@ Všechna potřebná pravidla pro validaci jsou již nastavena v Nette při gener
 \n{2}{Šifrování}
 Data zvalidovaného formuláře jsou uspořádána do asociativního pole a předána k~zašifrování třídě \texttt{Crypto}. Tato třída má ze šablony předány odkazy pro komunikaci se serverem a již po svém instanciování si od serveru vyžádá veřejný klíč volební komise a veřejný podpisový klíč serveru (oba RSA) a vygeneruje nový náhodný klíč AES-GCM (256-bit) a \textit{nonce} (inicializační vektor). Jednotlivé operace jsou prováděny asynchronně na pozadí, uživatele tedy nijak neomezují.
 
-Ve chvíli, kdy je hlas předán třídě Crypto je volební lístek (pole) převeden na~JSON řetězec a zašifrován pomocí vygenerovaného AES klíče. Díky použité metodě šifrování je výsledný šifrovaný text pro stejný otevřený text pokaždé jiný. Následně je zašifrován i samotný AES klíč a to RSA klíčem volební komise (s RSA-OAEP výplní). Dále je na sha-256 hash šifrovaného klíče aplikován náhodný faktor zaslepení $r$ podle algoritmu popsaného v části \koment{odkaz na kapitolu}. Zaslepená zpráva je odeslána na server k podpisu.
+Ve chvíli, kdy je hlas předán třídě Crypto je volební lístek (pole) převeden na~JSON řetězec a zašifrován pomocí vygenerovaného AES klíče. Díky použité metodě šifrování je výsledný šifrovaný text pro stejný otevřený text pokaždé jiný. Následně je zašifrován i samotný AES klíč a to RSA klíčem volební komise (s RSA-OAEP výplní). Dále je na~sha-256 hash šifrovaného klíče aplikován náhodný faktor zaslepení $r$ podle algoritmu popsaného v části \ref{section:blindSign}. Zaslepená zpráva je odeslána na server k podpisu.
 
-Server přijímá zaslepenou zprávu, která neobsahuje žádné informace o hlasovacím lístku, jedná se pouze o hash klíče použitého k zašifrování hlasovacího lístku. Aby bylo možné na straně klienta z podepsané zprávy odstranit náhodný faktor $r$, není možné použít žádné výplně. Použitá knihovna \texttt{phpseclib} navíc jako dodatečnou ochranu podpisového klíče proti časovým útokům používá zaslepování\cite{phpseclibBlinding}, které by rovněž znemožnilo odstranění faktoru $r$, proto nebylo použito. Podepsaná zpráva je vrácena zpět klientovi k dalšímu zpracování.
+Server přijímá zaslepenou zprávu, která neobsahuje žádné informace o hlasovacím lístku, jedná se pouze o hash klíče použitého k zašifrování hlasovacího lístku. Aby bylo možné na straně klienta z podepsané zprávy odstranit náhodný faktor $r$, není možné použít žádné výplně. Použitá knihovna \texttt{phpseclib} navíc jako dodatečnou ochranu podpisového klíče proti časovým útokům používá zaslepování \cite{phpseclibBlinding}, které by rovněž znemožnilo odstranění faktoru $r$, proto nebylo použito. Podepsaná zpráva je vrácena zpět klientovi k dalšímu zpracování.
 
 Na straně klienta je z podepsané zprávy odstraněn náhodný faktor $r$ reverzní operací zaslepení. Tím je získán validní podpis původní (nezaslepené) zprávy - zašifrovaného AES klíče. Pomocí veřejného podpisového klíče serveru a hashe zašifrovaného AES klíče je ověřena správnost podpisu. Pokud podpis zprávy odpovídá originálu, na server se odešle k uložení zašifrovaný hlasovací lístek, zašifrovaný AES klíč a podpis.
 
-\obr{Sekvenční diagram šifrování}{fig:diagramSifrovani}{0.6}{svg/sifrovani.eps}
+%\obr{Sekvenční diagram šifrování}{fig:diagramSifrovani}{0.6}{svg/sifrovani.eps}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.8\linewidth]{svg/sifrovani.eps}
+	\captionsetup{width=0.8\linewidth}
+	\caption[Sekvenční diagram šifrování]{Sekvenční diagram šifrování (zdroj: vlastní)}
+	\label{fig:diagramSifrovani}
+\end{figure}
 
 \n{2}{Ukládání}
 
@@ -52,19 +65,17 @@ Po přijetí dat k uložení tedy server opět ověří že přijatý zašifrova
 \n{2}{Sčítání}
 Sčítání hlasů je umožněno pouze po skončení voleb a to uživatelům s patřičným oprávněním. Před sečtením hlasů je nutné je nejdříve dešifrovat, za tímto účelem musí člen volební komise serveru zpřístupnit privátní RSA klíč odpovídající klíči, který byl nahrán volební komisí před začátkem voleb. Z důvodu co nejvyšší možné důvěryhodnosti volebního systému bylo zvoleno řešení, kdy server (nebo kdokoli s~přístupem k němu) nemá možnost hlasy dešifrovat dříve než volební komise uvolní potřebný RSA klíč. Tento způsob ovšem předpokládá správné vygenerování a~bezpečné uložení klíče volební komisí.
 
-Při nahrávání veřejné části RSA klíče je kontrolováno jestli se jedná o veřejný RSA klíč, který aplikace dokáže použít. Zodpovědnost za poskytnutí správného klíče je ovšem na volební komisi. Pokud by byl poskytnut například klíč, jež je chráněn heslem, aplikace by v současné verzi hlasy nedokázala dešifrovat. Zároveň není umožněno vyzkoušet kompatibilitu veřejného a privátního klíče s aplikací, aby server nepřišel do kontaktu s privátním kíčem dříve než je to absolutně nezbytné.
+Při nahrávání veřejné části RSA klíče je kontrolováno, jestli se jedná o veřejný RSA klíč, který aplikace dokáže použít. Zodpovědnost za poskytnutí správného klíče je ovšem na volební komisi. Pokud by byl poskytnut například klíč, jež je chráněn heslem, aplikace by v současné verzi hlasy nedokázala dešifrovat. Zároveň není umožněno vyzkoušet kompatibilitu veřejného a privátního klíče s aplikací, aby server nepřišel do kontaktu s privátním kíčem dříve než je to absolutně nezbytné.
 
 Pro volby s ukončeným hlasováním je v backendové části aplikace zpřístupněna volba nahrání privátního klíče a v záložce výsledků také tlačítko pro sečtení hlasů. Kliknutí na tlačítko vede na signál \texttt{countBallots}. Proces sčítání hlasů řídí třída \texttt{BallotCounter}, která je závislostí \texttt{ElectionPresenter}. Jediná veřejná metoda této třídy je \phpinline{processBallots($election): array}%$
 , která deleguje dešifrování a validaci hlasovacích lístků na třídy \texttt{BallotDecryptor} a \texttt{BallotValidator} a samotné sečtení hlasů provádí sama. Jednotlivé metody této třídy jsou vidět ve fragmentu \ref{php:BallotCounter}.
 
-\clearpage
 \begin{listing}[ht]
 \phpsnippet{tex/code/BallotCounter.php}
 \caption{Metody třídy BallotCounter}
 \label{php:BallotCounter}
 \end{listing}
 
-\clearpage
 Třída \texttt{BallotDecryptor} obsahuje dvě veřejné metody volané z třídy \texttt{BallotCounter}, metoda \phpinline{setElection()} pouze nastaví aktuálně zpracovávané volby a \phpinline{decryptBallots()} nejprve načte zašifrované hlasovací lístky z repozitáře, následně metodou \phpinline{verify($ballot)}%$
  ověří, že hash a podpis uložené v databázi odpovídá zpracovávanému volebnímu lístku a nakonec dešifruje AES klíč, kterým dešifruje samotná data. Dešifrovaná data jsou poté nastavena novému objektu \phpinline{DecryptedBallot}, který je repozitářem uložen. V případě chyby při ověřování, dešifrování a dalších, je chyba zaznamenána do logu (souboru) včetně identifikace hlasovacího lístku. Kód dešifrování je vidět na fragmentu \ref{php:BallotDecryptor}.
   

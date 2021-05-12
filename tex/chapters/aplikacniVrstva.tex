@@ -1,14 +1,11 @@
-Aplikační vrstva je tvořena především presentery, které obsluhují požadavky uživatele a pomocné třídy.  Ty mohou být zcela samostatné nebo rozšiřují chování využívaných Composer balíčků. Prezentační vrstva je tvořena šablonami. Použitá architektura propojuje a částečně prolíná obě vrstvy, proto jsou uváděny společně. Toto prolínání podle Davida Grudla vidíme i v Nette, jak uvádí v komentáři u svého článku: ``Dalo by se říct, že metoda \texttt{renderDefault()} je součástí vrstvy View, společně se šablonou.''
-\koment{https://zdrojak.cz/clanky/nette-framework-refactoring/?show=comments#comment-3554}
+Aplikační vrstva je tvořena především presentery, které obsluhují požadavky uživatele a pomocné třídy.  Ty mohou být zcela samostatné nebo rozšiřují chování využívaných Composer balíčků. Prezentační vrstva je tvořena šablonami. Použitá architektura propojuje a částečně prolíná obě vrstvy, proto jsou uváděny společně. Toto prolínání podle Davida Grudla vidíme i v Nette, jak uvádí v komentáři u svého článku: ,,Dalo by se říct, že metoda \texttt{renderDefault()} je součástí vrstvy View, společně se šablonou.'' \cite{NetteRefactoring}
 
 \n{2}{Presentery}
 \input{tex/chapters/presentery.tex}
 
 \n{2}{Šablony}
+\input{tex/chapters/sablony.tex}
 
-\n{3}{Skripty a balíčky}
-
-\n{3}{CSS styly}
 
 \clearpage
 \n{2}{Pomocné třídy}
@@ -20,8 +17,8 @@ Zkráceně gridy, tyto interaktivní tabulky umožňují kromě zobrazení dat i
 	\centering
 	\includegraphics[width=\linewidth]{svg/mockup/datagrid.eps}
 	\captionsetup{width=\linewidth}
-	\caption[Vzhled datagridu]{Vzhled datagridu (zdroj: Freepik.com)}
+	\caption[Vzhled datagridu]{Vzhled datagridu (zdroj: vlastní, Freepik.com)}
 	\label{mockup:login}
 \end{figure}
 
-Akce nad řádkem jsou typicky úlohy typu editace, mazání zobrazení detailu a směřují na Signál presenteru (metody handle). Jsou reprezentovány ikonami. Požadavek na~vymazání řádku (záznamu) je navíc opatřen potvrzovacím dialogovým oknem, aby nedošlo k nechtěnému smazání při nechtěném kliknutí.
+Akce nad řádkem jsou typicky úlohy typu editace, mazání zobrazení detailu a~směřují na Signál presenteru (metody handle). Jsou reprezentovány ikonami. Požadavek na~vymazání řádku (záznamu) je navíc opatřen potvrzovacím dialogovým oknem, aby nedošlo k nechtěnému smazání při nechtěném kliknutí.

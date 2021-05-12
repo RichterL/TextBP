@@ -1,5 +1,5 @@
 Jak již bylo řečeno, jedná se architektonický vzor MVP. 
-Jednotlivé části je potřeba chápat jako abstraktní vrstvy, nelze si pod nimi představit konkrétní (PHP) třidy. Jedním důvodem je možné prolínání vrstev v rámci jedné třídy, tím druhým a~závažnějším je pak nepochopení celého principu MVC/P architektury. Tím je myšleno domění mnohých (začínajících) programátorů, že Model je jeden konkrétní objekt (entita) \koment{zdroj - je nutny?}, přičemž modelová vrstva jsou nejen entity ale i business (nebo doménová) logika a dohromady tvoří tuto modelovou vrstvu. Pokud bude v~této práci zmíněn \textbf{Presenter}, je tím myšlena konkrétní třída nebo skupina tříd nikoliv vrstva.
+Jednotlivé části je potřeba chápat jako abstraktní vrstvy, nelze si pod nimi představit konkrétní (PHP) třidy. Jedním důvodem je možné prolínání vrstev v rámci jedné třídy, tím druhým a~závažnějším je pak nepochopení celého principu MVC/P architektury. Tím je myšleno domění mnohých (začínajících) programátorů, že Model je jeden konkrétní objekt (entita) \cite{MVCmodel}, přičemž modelová vrstva jsou nejen entity ale i business (nebo doménová) logika a dohromady tvoří tuto modelovou vrstvu. Pokud bude v~této práci zmíněn \textit{Presenter}, je tím myšlena konkrétní třída nebo skupina tříd nikoliv vrstva.
 
 \n{3}{Třída Presenter}
 
@@ -8,30 +8,24 @@ Presenter přijímá objekt \phpinline{Nette\Application\Request}, který předs
 Obrázek \ref{fig:zivotniCyklusPresenteru} přehledně popisuje sled volání jednotlivých metod, přičemž jsou všechny nepovinné. Vynecháním definic všech metod by došlo pouze k odeslání statického obsahu šablony.
 
 \begin{figure}[h]
-		\centering \tiny \fontfamily{lmtt}\fontseries{l}\selectfont
+		\centering \footnotesize \fontfamily{lmtt}\fontseries{l}\selectfont
 %		\def\svgwidth{0.5\columnwidth}
-		\def\scgscale{1}
+%		\def\scgscale{1.5}
 		\input{svg/lifecycle2.pdf_tex}
 		\normalsize \sffamily
 		\captionsetup{width=\linewidth}
-		\caption{Životní cyklus presenteru}
+		\caption[Životní cyklus presenteru]{Životní cyklus presenteru \cite{NetteDocs}}
 		\label{fig:zivotniCyklusPresenteru}
 \end{figure}
-%\svgobr{Životní cyklus presenteru}{fig:zivotniCyklusPresenteru}{1}{lifecycle2}
+%\svgobr{Životní cyklus presenteru}{fig:zivotniCyklusPresenteru}{0.3}{lifecycle2}
 
-Požadavek v Nette je tvořen kombinací \texttt{Presenter:Action}. \it{Signál} rozšiřuje základní požadavek a volá se vždy současně s aktuálním presenterem a akcí. Nejčastěji se signály využívají pro AJAXové požadavky nebo v komponentách, což jsou samostatné znovupoužitelné objekty. Samotný presenter je potomkem komponenty, z toho vyplývá, že komponenty mohou s View komunikovat napřímo pouze díky signálům. V obrázku nejsou uvedeny metody \phpinline{beforeRender()} a~\phpinline{afterRender()}, které společně se \phpinline{startup()} a \phpinline{shutdown()} nemají vazbu na \it{akci} nebo \it{signál} a mohou být v~rámci Presenteru definovány právě jednou, slouží k definici společného chování napříč různými akcemi\cite{NettePresentery}.
+Požadavek v Nette je tvořen kombinací \texttt{Presenter:Action}. \it{Signál} rozšiřuje základní požadavek a volá se vždy současně s aktuálním presenterem a akcí. Nejčastěji se signály využívají pro AJAXové požadavky nebo v komponentách, což jsou samostatné znovupoužitelné objekty. Samotný presenter je potomkem komponenty, z toho vyplývá, že komponenty mohou s View komunikovat napřímo pouze díky signálům. V obrázku nejsou uvedeny metody \phpinline{beforeRender()} a~\phpinline{afterRender()}, které společně se \phpinline{startup()} a \phpinline{shutdown()} nemají vazbu na \it{akci} nebo \it{signál} a mohou být v~rámci Presenteru definovány právě jednou, slouží k definici společného chování napříč různými akcemi \cite{NettePresentery}.
+
+\n{3}{Šablonovací systém}
+Nette k tvoření šablon nabízí vlastní systém pojmenovaný Latte. Šablony jsou psané syntaxí HTML a vlastní kód Latte, je obsažen uvnitř značek \texttt{\{} a \texttt{\}}. Celá šablona je přeložena na optimalizovaný PHP kód a následně uložena do diskové cache, Latte je tedy velice rychlé. Umí jedoduché konstrukce větvení a cyklů, vlastní \texttt{n:atributy}, které zjednodušují zápis kódu v šabloně a mnoho dalšího. Escapování řetězců v šabloně je tzv. kontextově sensitivní - Latte rozezná, jestli se řetězec vypisuje v rámci HTML nebo JavaScript kódu a patřičně ho escapuje. Právě správné escapování řetězců je předpokladem aplikace zabezpečené proti XSS útokům \cite{XssPrevention}\cite{Latte}.
 
 \n{3}{Routování} \label{section:routovani}
-Veškeré HTTP požadavky klienta míří na soubor \tt{www/index.php}, zde se inicialzuje prostředí Nette, požadavek se přeloží do objektu \phpinline{Nette\Application\Request} a~vyvolá se příslušný Presenter. Proces překládání HTTP požadavků, resp. překlad URL se běžně u PHP frameworků označuje jako routování. Router umí URL adresu nejen rozložit ale také složit (neboli vytvářet odkazy). Maska routy říká routeru, jak přeložit URL adresu na tvar \texttt{Presenter:Action}, případně složitější tvary\cite{NetteRoutovani}. Základní instalace Nette obsahuje jednu jedinou routu, která je vidět na výňatku kódu \ref{php:simpleRoute}, tato routa převede URL tvaru \phpinline{https://domain.com/presenter/action} na~požadavek tvaru \texttt{Presenter:Action}, přičemž parametr \phpinline{id} se předává jako argument metodá action a render příslušného presenteru. Pokud není v URL přítomná část presenter nebo action, doplní se o výchozí nastavení, zde \texttt{Homepage:default}. Tabulka \ref{tab:simpleRoute} obsahuje příklady překladů pomocí této základní routy.
-
-
-\begin{listing}[ht]
-\phpfile{tex/code/simpleRoute.php}
-\caption{Základní routa v Nette}
-\label{php:simpleRoute}
-\end{listing}
-\clearpage
-
+Veškeré HTTP požadavky klienta míří na soubor \tt{www/index.php}, zde se inicialzuje prostředí Nette, požadavek se přeloží do objektu \phpinline{Nette\Application\Request} a~vyvolá se příslušný Presenter. Proces překládání HTTP požadavků, resp. překlad URL se běžně u PHP frameworků označuje jako routování. Router umí URL adresu nejen rozložit, ale také složit (neboli vytvářet odkazy). Maska routy říká routeru, jak přeložit URL adresu na tvar \texttt{Presenter:Action}, případně složitější tvary\cite{NetteRoutovani}. Základní instalace Nette obsahuje jednu jedinou routu, která je vidět na výňatku kódu \ref{php:simpleRoute}, tato routa převede URL tvaru \phpinline{https://domain.com/presenter/action} na~požadavek tvaru \texttt{Presenter:Action}, přičemž parametr \phpinline{id} se předává jako argument metodá action a render příslušného presenteru. Pokud není v URL přítomná část presenter nebo action, doplní se o výchozí nastavení, zde \texttt{Homepage:default}. Tabulka \ref{tab:simpleRoute} obsahuje příklady překladů pomocí této základní routy.
 \tab{Příklady routování}{tab:simpleRoute}{1}{ll}{
 \hline
 URL adresa & Nette požadavek \\
@@ -40,4 +34,13 @@ https://domain.com/ & Homepage:default \\
 https://domain.com/homepage/about & Homepage:about \\
 https://domain.com/article/view/12 & Article:view, id = 12 \\
 }
+\clearpage
+\begin{listing}[ht]
+\phpfile{tex/code/simpleRoute.php}
+\caption{Základní routa v Nette}
+\label{php:simpleRoute}
+\end{listing}
+
+
+
 

@@ -1,12 +1,18 @@
-V aplikaci se nachází tři skupiny presnterů, podle příslušnosti k modulu: Core, Backend a Frontend. Šablony pro konkrétní Presenter jsou ve společném adresáři \tt{templates/jmenoPresenteru/} a název souboru každé šablony odpovídá akci daného presenteru. Pokud akce nevede na vykreslení šablony, nemusí mít šablonu vůbec vytvořenou. Příkladem je \tt{Sign:out} (\it{SignPresenter} a akce \it{out}), která přihlášeného uživatele odhlásí a přesměruje na přihlašovací formulář \tt{Sign:in} (stejný presenter, akce In). SignPresenter obsahuje metodu \phpinline{renderIn} a tedy vyžaduje i šablonu \tt{templates/Sign/in.latte}
+V aplikaci se nachází tři skupiny presnterů, podle příslušnosti k modulu: Core, Backend a Frontend. Šablony pro konkrétní Presenter jsou ve společném adresáři \tt{templates/jmenoPresenteru/} a název souboru každé šablony odpovídá akci daného presenteru. Pokud akce nevede na vykreslení šablony, nemusí mít šablonu vůbec vytvořenou. Příkladem je \tt{Sign:out} (\it{SignPresenter} a akce \it{out}), která přihlášeného uživatele odhlásí a přesměruje na přihlašovací formulář \tt{Sign:in} (stejný presenter, akce \textit{In}). SignPresenter obsahuje metodu \phpinline{renderIn} a tedy vyžaduje i šablonu \tt{templates/Sign/in.latte}
 
 %--------------%
 %--------------%
 
 \n{3}{Frontend}
-\obr{Třídy Presenter frontendové části}{fig:FrontendPresenters}{1}{svg/frontendPresenters.eps}
-
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{svg/frontendPresenters.eps}
+	\captionsetup{width=\linewidth}
+	\caption[Třídy Presenter frontendové části]{Třídy Presenter frontendové části (zdroj: vlastní)}
+	\label{fig:FrontendPresenters}
+\end{figure}
 %--------------%
+\clearpage
 \paragraph{SignPresenter} Jediným úkolem tohoto presenteru je uživateli poskytnout možnosti přihlášení a odhlášení.
 
 % \tab{popisek}{label}{rozměr (0.0 - 1.0)}{definice sloupců}{obsah} 
@@ -23,7 +29,7 @@ Dostupné akce:
 	\item \tt{Sign:in} Zobrazí přihlašovací formulář\\
 Nemá definované metody action ani render - ekvivalentní by byly prázdné metody. Jediným úkolem této metody je zobrazit formulář pro přihlášení, který se vytváří metodou \phpinline{SignPresenter::createComponentSignInForm()}. Po~odeslání formuláře se volá opět tato akce, nicméně se provede i callback formuláře \phpinline{SignPresenter::signInFormSuccess()}. V tomto callbacku se aplikace pokusí o přihlášení uživatele pomocí poskytnutých údajů. Presenter je předá třídě implementující rozhraní \phpinline{Nette\Security\IAuthenticator}. Princip přihlašování je popsán v části \ref{section:prihlasovani}. Na tuto akci zároveň odkazují všichni potomci BasePresenter z metody \phpinline{BasePresenter::checkRequirements()}, pokud se uživatel pokusí provést jakoukoli akci jako nepřihlášený (např. po~vypršení session).
 	\item \tt{Sign:out} Odhlásí uživatele\\
-Uživatel po kliknutí na odkaz ``Odhlásit'' vyvolá akci tuto akci, kdy je odhlášen a následně přesměrován na přihlašovací formulář -- \tt{Sign:in}. Tato akce nemá render metodu ani šablonu (dochází k přesměrování, které předchází jakémukoli výstupu a ukončuje aktuální cyklus aplikace).
+Uživatel po kliknutí na odkaz ,,Odhlásit'' vyvolá akci tuto akci, kdy je odhlášen a následně přesměrován na přihlašovací formulář -- \tt{Sign:in}. Tato akce nemá render metodu ani šablonu (dochází k přesměrování, které předchází jakémukoli výstupu a ukončuje aktuální cyklus aplikace).
 \end{itemize}
 
 
@@ -34,7 +40,7 @@ Metoda \phpinline{checkRequirements()} slouží k ověření, že je uživatel p
 
 
 %--------------%
-\paragraph{HomePagePresenter} slouží jako rozcestník po přihlášení uživatele. Jeho jediná akce je \tt{Homepage:default}, a obsahuje pouze render metodu, která získává objekty Election, které jsou dostupné danému uživateli.
+\paragraph{HomePagePresenter} slouží jako rozcestník po přihlášení uživatele. Jeho jediná akce je \texttt{Homepage:default}, a obsahuje pouze render metodu, která získává objekty Election, které jsou dostupné danému uživateli.
 
 
 %--------------%
@@ -42,7 +48,7 @@ Metoda \phpinline{checkRequirements()} slouží k ověření, že je uživatel p
 
 Formulář \phpinline{VotingForm} je samostatnou třídou rošiřující \phpinline{Control}\footnote{\Verb{Nette\Application\UI\Control}} - v názvosloví Nette komponentou. Komponenty mohou mít vlastní šablony, což umžňuje zpřehlednit šablonu presenteru pokud není celý formulář vykreslován automaticky přes \phpinline{FormRenderer}. Zároveň je i samotný kód presenteru jednodušší, o vytvoření formuláře, validaci a zpracování se totiž stará třída formuláře.
 
-Hlasovací formulář neobsahuje žádnou logiku pro validaci ani zpracování odeslaných dat. Veškerá validace probíhá pomocí JavaScriptu na straně klienta a data se odesílají teprve po zašifrování a to přímo na presenter pomocí AJAX. Zpracování těchto požadavků (signálů) pomocí handle metod je popsáno v samostatné části \ref{section:zpracovaniHlasu} věnované zpracování hlasovacích lístků.
+Hlasovací formulář neobsahuje žádnou logiku pro validaci ani zpracování odeslaných dat. Veškerá validace probíhá pomocí JavaScriptu na straně klienta a data se odesílají teprve po zašifrování a to přímo na presenter pomocí AJAX. Zpracování těchto požadavků (signálů) pomocí handle metod je popsáno v samostatné části~\ref{section:zpracovaniHlasu}~věnované zpracování hlasovacích lístků.
 
 
 %--------------%
@@ -56,7 +62,13 @@ Tato část obsahuje nástroje pro správu uživatelů, uživatelských oprávn�
 
 Datagridy jsou vytvářeny pomocí třídy \phpinline{App\Backend\Utils\DataGrid\Datagrid}, která zefektivňuje způsob vytváření jednotlivých gridů díky zapouzdření často používaných konstrukcí. Tím se nejen výsledný kód v presenterech zjednoduší, ale zároveň gridy napříč aplikací mají stejné chování a na všechny se aplikuje stejná logika. Tímto přístupem se také podstatně usnadní změny ovlivňující všechny gridy - například změna ikony se projeví všude.
 
-\obr{Třídy Presenter backendové části}{fig:BackendPresenters}{1}{svg/backendPresenters.eps}
+\begin{figure}[h]
+	\centering
+	\includegraphics[height=\textheight]{svg/backendPresentersPortrait.eps}
+	\captionsetup{width=\linewidth}
+	\caption[Třídy Presenter backendové části]{Třídy Presenter backendové části (zdroj: vlastní)}
+	\label{fig:BackendPresenters}
+\end{figure}
 
 %--------------%
 \paragraph{SignPresenter} slouží ke správě přihlášení do aplikace, v zásadě se jedná o obdobu frontendového \phpinline{SignPresenter}. Popis této třídy je tedy identický.
@@ -82,7 +94,7 @@ V záhlaví detailu se nachází kontextové menu, které umožňuje volby (de)a
 Jednotlivými záložkami jsou:
 \begin{itemize}
 	\item \b{Overview}, kde se zobrazuje formátovaný popis voleb a tři pole s šifrovacími klíči (pokud jsou dostupné). Těmito klíči jsou: privátní a veřejný klíč volební komise a veřejný podpisový klíč serveru.
-	\item \b{Results} s výsledky voleb. Tato záložka je distupná pouze po ukončení voleb. V případě, že dosud nejsou spočítané výsledky, je nabídnuto jejich spočítání a~následně se již zobrazují pouze výsledky v přehledných grafech.
+	\item \b{Results} s výsledky voleb. Tato záložka je distupná pouze po ukončení voleb. V~případě, že dosud nejsou spočítané výsledky, je nabídnuto jejich spočítání a~následně se již zobrazují pouze výsledky v přehledných grafech.
 	\item \b{Questions} zobrazí grid otázek definovaných pro dané volby. Otázkou může být volená pozice, její odpověďmi pak jména kandidátů. Při založení nové otázky je možné nastavit minimální a maximální počet otázek, zda je odpověď povinná a~jednotlivé odpovědi. V gridu je možné otázky editovat a mazat.
 	
 	\item \b{Answers} obsahuje grid odpovědí na všechny otázky, zde je možné odpovědi mazat.
@@ -103,7 +115,7 @@ Jednotlivými záložkami jsou:
 \paragraph{ResourcesPresenter} velice podobý předchozímu RolePresenter. Tento umožňuje správu prostředků (\textit{Resource}), na stránce detailu je pak k dispozici správa akcí (\textit{Privilege}) dostupných pro daný prostředek.
 
 \n{3}{Core}
-Tento modul je společný pro frontendovou i backendovou část a obsahuje pouze uživatelsky přívětivé zpracování chybových stavů. Pokud se uživatel pokouší přistoupit na neexistující stránku, není nalezen požadovaný záznam v databázi (HTTP 404) nebo nemá uživatel potřebná oprávnění k zobrazení stránky (HTTP 403), místo základních chybových stránek HTTP serveru mu je zobrazena chybová stránka vygenerovaná Nette. Stejně tak v případě chyby serveru (HTTP 500). 
+Tento modul je společný pro frontendovou i backendovou část a obsahuje pouze uživatelsky přívětivé zpracování chybových stavů. Pokud se uživatel pokouší přistoupit na neexistující stránku, není nalezen požadovaný záznam v databázi (HTTP~404) nebo nemá uživatel potřebná oprávnění k zobrazení stránky (HTTP~403), místo základních chybových stránek HTTP serveru mu je zobrazena chybová stránka vygenerovaná Nette. Stejně tak v případě chyby serveru (HTTP~500). 
 
-V případě, že se Nette nachází ve vývojovém režimu, jsou všechny chyby aplikace předávány ke zpracování nástroji Tracy (dříve Laděnka) \cite{Tracy}, který vypíše chybu včetně části zdrojového kódu, předávaných proměnných, dotazů na databázi a dalších velice užitečných informací pro ladění chyb. V produkčním režimu jsou chyby předávány ErrorPresenteru, který chyby 4xx předává dále do Error4xxPresenter případně rovnou předá statickou šablonu s chybou 500 nebo 503.
+V případě, že se Nette nachází ve vývojovém režimu, jsou všechny chyby aplikace předávány ke zpracování nástroji Tracy (dříve Laděnka) \cite{Tracy}, který vypíše chybu včetně části zdrojového kódu, předávaných proměnných, dotazů na databázi a dalších velice užitečných informací pro ladění chyb. V produkčním režimu jsou chyby předávány \texttt{ErrorPresenteru}, který chyby 4xx předává dále do \texttt{Error4xxPresenter} případně rovnou předá statickou šablonu s chybou 500 nebo 503.
 

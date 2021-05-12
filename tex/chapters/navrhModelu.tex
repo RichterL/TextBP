@@ -1,36 +1,30 @@
-Na základě shromážděných požadavků na aplikaci v kapitole \koment{odkaz na kapitolu} byl sestaven obecný model kritických částí aplikace. Základem volební aplikace je samozřejmě model hlasování. Entita \phpinline{Election} představuje kořen stejnojmeného agregátu (\it{Aggregate Root}). Vazby mezi jednotlivými entitami jsou znázorněny jako diagram modelu v obrázku \ref{fig:ElectionModel}. Jednotlivými entitami tohoto agregátu jsou: 
+Na základě shromážděných požadavků na aplikaci v částech \ref{section:pozadavky} a \ref{section:pozadavkyCele} byl sestaven obecný model kritických částí aplikace. Základem volební aplikace je samozřejmě model hlasování. Entita \phpinline{Election} představuje kořen stejnojmeného agregátu (\it{Aggregate Root}). Vazby mezi jednotlivými entitami jsou znázorněny jako diagram modelu v obrázku \ref{fig:ElectionModel}. Jednotlivými entitami tohoto agregátu jsou: 
 \begin{itemize}
-	\item \textbf{Election} kořen agregátu představující jedny konkrétní volby / hlasování
-	\item \textbf{Question} ve volbách představuje volenou pozici, v obecném hlasování jednu otázku
-	\item \textbf{Answer} je množina kandidátů, resp. odpovědí na otázku
-	\item \textbf{Voter} zahrnuje všechny oprávněné voliče
-	\item \textbf{Ballot} jsou všechny odevzdané hlasovací lístky v daných volbách / hlasování
+	\item \textbf{Election} - kořen agregátu představující jedny konkrétní volby / hlasování.
+	\item \textbf{Question} - ve volbách představuje volenou pozici, v obecném hlasování jednu otázku.
+	\item \textbf{Answer} - množina kandidátů, resp. odpovědí na otázku.
+	\item \textbf{Voter} - zahrnuje všechny oprávněné voliče.
+	\item \textbf{Ballot} - všechny odevzdané hlasovací lístky v daných volbách / hlasování.
 \end{itemize}
 
 \begin{figure}[h]
-		\centering \tiny \fontfamily{lmss}\selectfont
-		\def\svgwidth{0.5\columnwidth}
-		\input{svg/ElectionModel3.pdf_tex}
-		\normalsize \sffamily
-		\captionsetup{width=\linewidth}
-		\caption{Model objektů balíčku Election}
-		\label{fig:ElectionModel}
+	\centering
+	\includegraphics[width=0.6\linewidth]{svg/ElectionModelFull.eps}
+	\captionsetup{width=0.6\linewidth}
+	\caption[Model objektů balíčku Election]{Model objektů balíčku Election (zdroj: vlastní)}
+	\label{fig:ElectionModel}
 \end{figure}
-\clearpage
 
 Druhou zásadní částí aplikace je systém pro správu přístupu uživatelů (ACL). Nejjednodušší implementací takového systému je přiřazení oprávnění pomocí statické konfigurace. Tento přístup podporuje Nette bez nutnosti jakéhokoli dalšího rozšiřování o vlastní správu oprávnění. Nicméně takový přístup značně limituje flexibilitu aplikace, jelikož se jakákoli změna musí ručně zapsat do konfigurace, která bývá většinou uložena na serveru ve formě souboru. Z tohoto důvodu byl namodelován vlastní ACL systém.
 
 \begin{figure}[h]
-		\centering \tiny \fontfamily{lmss}\selectfont
-		\def\svgwidth{0.6\columnwidth}
-		\input{svg/AclModel3.pdf_tex}
-		\normalsize \sffamily
-		\captionsetup{width=\linewidth}
-		\caption{Model objektů balíčku ACL}
-		\label{fig:AclModel}
+	\centering
+	\includegraphics[width=\linewidth]{svg/ACLModelFull.eps}
+	\captionsetup{width=\linewidth}
+	\caption[Model objektů balíčku ACL]{Model objektů balíčku ACL (zdroj: vlastní)}
+	\label{fig:AclModel}
 \end{figure}
-
-V tomto případě je kořenem agregátu entita \phpinline{Role} symbolizující jednu roli uživatele. Role může mít nastavena pravidla \phpinline{Rule}, která budou řídit přístup k~prostředkům \phpinline{Resource} a akcím \phpinline{Privilege} na nich vykonávaných. Každé pravidlo je kombinací právě jednoho prostředku a jedné akce. Pravidlo zároveň určuje, jestli je pro danou roli tato akce povolena nebo zakázána (\it{allow / deny}). Tabluka \ref{tab:prikladyACL} ukazuje příklady možného nastavení tohoto systému.
+V tomto případě je kořenem agregátu entita \phpinline{Role} symbolizující jednu roli uživatele. Role může mít nastavena pravidla \phpinline{Rule}, která budou řídit přístup k~prostředkům \phpinline{Resource} a akcím \phpinline{Privilege} na nich vykonávaných. Každé pravidlo je kombinací právě jednoho prostředku a jedné akce. Pravidlo zároveň určuje, jestli je pro danou roli tato akce povolena nebo zakázána (\it{allow / deny}). Tabulka \ref{tab:prikladyACL} ukazuje příklady možného nastavení tohoto systému.
 
 
 % \tab{popisek}{label}{rozměr (0.0 - 1.0)}{definice sloupců}{obsah} 
