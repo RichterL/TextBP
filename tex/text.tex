@@ -6,13 +6,13 @@
 \nn{Úvod}
 V době rapidního rozvoje technologií, kdy se digitalizuje kde co a prakticky vše je na dosah ruky díky internetu a mobilním telefonům, se stále více aspektů života přesouvá na obrazovky v komfortu našich domovů. Týká se to například i vyřizování oficiálních záležitostí a komunikace se státní správou. Velkou výzvou je ovšem přenést jeden ze základních pilířů demokracie - volby - co nejblíže k voliči. Dostupnost voleb v internetovém prohlížeči nemusí být jen o komfortu, což dokládá aktuální pandemie Covid-19. V současné situaci by takovou možnost jistě uvítal nejeden volič.
 
-Cílem této práce je vytvořit funkční webovou aplikaci umožňující provozovat volby do akademických senátů Univerzity Tomáše Bati ve Zlíně, která bude uživatelsky přívětivá a zároveň bezpečná. V teoretické části budou prozkoumány obecné požadavky elektronických voleb, které by aplikace měla splňovat. Na základě stanovených požadavků a zvolené kryptografické metody zajišťující anonymitu voleb pak bude postupně navrhována aplikace.
+Cílem této práce je vytvořit funkční webovou aplikaci umožňující provozovat volby do akademických senátů na Univerzitě Tomáše Bati ve Zlíně, která bude uživatelsky přívětivá a zároveň bezpečná. V teoretické části budou prozkoumány obecné požadavky elektronických voleb, které by aplikace měla splňovat. Na základě stanovených požadavků a zvolené kryptografické metody zajišťující anonymitu voleb pak bude postupně navrhována aplikace.
 
 Dále je představen architektonický vzor Model View Controller a framework Nette, se kterým mám praktické zkušenosti. Teoretickou část práce tvoří převážně abstraktní návrh aplikace, která byla od začátku tvořena s ohledem na jednoduchost budoucích úprav. Aplikace podobného typu by z pohledu zdrojového kódu a struktury měla být přehledná a její údržba a rozšiřování snadné. I z tohoto důvodu bylo při modelování i implementaci dbáno na co nejlepší dodržení zásad Domain Driven Designu.
 
 V praktické části jsou detailněji popsány jednotlivé části aplikace a jejich funkce a vzájemné provázání. Nejpodstatnější a pravděpodobně i nejzajímavější částí je způsob zpracování a nakládání s hlasovacími lístky, kterému je věnován závěr práce.
 
-Téma práce bylo navrženo vedoucím práce, jako možné řešení voleb na půdě UTB, jelikož vlastní aplikací nedisponuje. Vzhledem k osobním zkušenostem s programováním webových aplikací mě tato výzva zaujala především možností vytvořit aplikaci od návrhu až po její finální implementaci. Aplikace zároveň není pouze teoretickým příkladem, ale řešením reálného problému, který by mohl být uplatněn v praxi.
+Téma práce bylo navrženo vedoucím práce, jako možné řešení voleb a hlasování akademických orgánů UTB, jelikož vlastní aplikací nedisponuje. Vzhledem k osobním zkušenostem s programováním webových aplikací mě tato výzva zaujala především možností vytvořit aplikaci od návrhu až po její finální implementaci. Aplikace zároveň není pouze teoretickým příkladem, ale řešením reálného problému, který by mohl být uplatněn v praxi.
 
 % ============================================================================ %
 
@@ -23,7 +23,7 @@ Téma práce bylo navrženo vedoucím práce, jako možné řešení voleb na p�
 \n{1}{Požadavky na funkčnost}\label{section:pozadavkyCele}
 \input{tex/chapters/pozadavky.tex}
 
-\begin{comment}
+%\begin{comment}
 \n{1}{Návrh aplikace}
 Jádrem celé aplikace byl zvolen PHP framework Nette od českého vývojáře Davida Grudla. 
 V konkurenci světových frameworků jako je Laravel nebo Symfony je velice oblíbený především v českém prostředí. Zcela jistě i díky kvalitní dokumentaci v~češtině, pravidelným aktualizacím i aktivnímu diskuznímu fóru. 
@@ -73,7 +73,7 @@ Konkrétní implementace modelu popsaného v teoretické části probíhala post
 \n{1}{Zpracování hlasovacích lístků} \label{section:zpracovaniHlasu}
 Nejcitlivější částí aplikace je bez pochyb právě práce s hlasovacími lístky, proto jí byla věnována samostatná část.
 \input{tex/chapters/zpracovaniHlasu.tex}
-\end{comment}
+%\end{comment}
 
 % ============================================================================ %
 \nn{Závěr}

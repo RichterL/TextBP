@@ -1,6 +1,6 @@
 Celý proces získání konkrétní entity pro potřeby aplikační vrstvy je postaven na~několika návrhových vzorech. Správné užití návrhových vzorů umožní zapouzdřit chování jednotlivých tříd, nebudou vytvářena těsná propojení jednotlivých tříd a celý zdrojový kód bude flexibilnější. Cílem tohoto přístupu je zjednodušení případných budoucích úprav aplikace. Těsné provázání tříd aplikační a databázové vrstvy sice znamená méně náročnou práci při první implementaci, ale o to je náročnější kód v~budoucnosti upravit. 
 
-Příkladem může být objekt -- entita, který se umí perzistovat, tj. je přímo závislý na konkrétním úložišti. Při změně úložiště je pak potřeba upravit všechny takové objekty.
+Příkladem může být objekt -- entita, který se umí perzistovat, tj. je přímo závislý na~konkrétní implementaci úložiště. Při změně úložiště je pak potřeba upravit všechny takové objekty.
 
 \n{2}{Modelová vrstva}
 Z pohledu architektury MVC reprezentuje modelová vrstva data a manipulaci s nimi a v aplikaci se výrazně překrývá s doménovou vrstvou z pohledu DDD. Způsob implementace byl zvolen tak, aby zbytek aplikace nebyl pevně spojen se způsobem získávání a ukládání dat (entit).
