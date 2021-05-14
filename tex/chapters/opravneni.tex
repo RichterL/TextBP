@@ -2,7 +2,7 @@ Ověření oprávnění uživatele provést akci (autorizace) na frontendové č
 
 Backendová část je v tomto ohledu o něco složitější. Jednotliví uživatelé mohou mít přístup k presenteru, ale už ne k nějaké jeho konkrétní akci nebo signálu (metodám obecně). Podle modelu definovaného v části \ref{section:Entity} byly vytvořeny jednotlivé třídy entit. Proces autorizace stejně jako autentizace inicializuje Nette objekt \texttt{User}\footnote{\label{user}\Verb{Nette\Security\User}}. V případě přihlašování uživatelů jsou mu předávány implementace napřímo, jelikož se používají dvě různé. U autorizace stačí předat jednu konkrétní implementaci, což je nejjednodušší provést v konfiguračním souboru aplikace. V soubrou \texttt{common.neon} tedy byly zaregistrovány služby \texttt{Permission}\footnote{\Verb{Nette\Security\Permission}} a \texttt{AuthorizatorFactory}. Framework se o předání závislostí postará sám.
 
-V rámci třídy \texttt{AuthorizatorFactory} jsou z repozitáře získány včechny prostředky a jejich akce a zaregistrovány v \texttt{Permission}. Dále se získají všechny role a postupně se zaregistrují společně s jejich pravidly. Jako poslední je zaregistrována role \texttt{superAdmin}, uživatel s touto rolí má nastaveno jediné pravidlo - vše povoleno. 
+V rámci třídy \texttt{AuthorizatorFactory} jsou z repozitáře získány všechny prostředky a jejich akce a zaregistrovány v \texttt{Permission}. Dále se získají všechny role a postupně se zaregistrují společně s jejich pravidly. Jako poslední je zaregistrována role \texttt{superAdmin}, uživatel s touto rolí má nastaveno jediné pravidlo - vše povoleno. 
 
 \begin{listing}[ht]
 \phpsnippet{tex/code/autorizace.php}
@@ -10,14 +10,14 @@ V rámci třídy \texttt{AuthorizatorFactory} jsou z repozitáře získány vče
 \label{php:autorizace}
 \end{listing}
 
-Nette umožňuje pravidla nastavovat dvojím způsobem, výčtem povolených akcí a~povolením všech akcí a výčtem akcí zakázaných. Aplikace umožňuje vytvořit pravidla obou typů, zakazující (\textit{deny}) typ má nicméně smysl pouze pro roli \texttt{superAdmin}, která je jako jediná definována druhým způsobem. Ostatní role vždy obsahují pouze výčet povolených akcí, vše ostatní je zakázáno.
+Nette umožňuje pravidla nastavovat dvojím způsobem. Výčtem povolených akcí a~povolením všech akcí a výčtem akcí zakázaných. Aplikace umožňuje vytvořit pravidla obou typů, zakazující (\textit{deny}) typ má nicméně smysl pouze pro roli \texttt{superAdmin}, která je jako jediná definována druhým způsobem. Ostatní role vždy obsahují pouze výčet povolených akcí, vše ostatní je zakázáno.
 
 Zjistit, zda je uživatel oprávněn provést požadovanou akci, lze několika způsoby. Napřímo pomocí metody \phpinline{User::isAllowed($resource, $privilege)}, která vrací \texttt{true}, pokud alespoň jedna z rolí uživatele k akci opravňuje, jinak vrací \texttt{false}. Tento způsob lze využít i v šablonách, kde je objekt uživatele automagicky [\textit{sic}] dostupný jako proměnná \phpinline{$user}%$
 . V presenterech se získá pomocí \phpinline{$this->getUser()} %$
  a~komponenty mají presenter dostupný jako členskou proměnnou, objekt \texttt{User} tedy získají pomocí \phpinline{$this->presenter->getUser()}%$
 . Ostatním třídám aplikace se předává jako závislost v konstruktoru pomocí DI Containeru.
 
-Jelikož presentery zpracovávají především požadavky od uživatele, podstatná část jejich metod by obsahovala opakující se volání metody \texttt{isAllowed}. Proto bylo využito anotací jednotlivých metod, příklad takové anotace je uveden ve fragmentu \ref{php:autorizaceAnotace}. Čtení anotací Nette usnadňuje pomocí objektu \texttt{MethodReflection}\footnote{\Verb{Nette\Application\UI\MethodReflection}}, který je předáván metodě \texttt{checkRequirements()} každého presenteru. Tato metoda je v průběhu životního cyklu presenteru volána několikrát, poprvé při jeho vytvoření a předává se jí objekt \texttt{ComponentReflection}\footnote{\Verb{Nette\Application\UI\ComponentReflection}} - reflexe aktuálního presenteru - a poté před každým \textit{action}, \textit{handle} a \textit{render} v tomto pořadí s reflexí dané metody. Tímto bylo dosaženo velice efektivního zabezpeční jednotlivých částí presenteru.
+Jelikož presentery zpracovávají především požadavky od uživatele, podstatná část jejich metod by obsahovala opakující se volání metody \texttt{isAllowed}. Proto bylo využito anotací jednotlivých metod, příklad takové anotace je uveden ve fragmentu \ref{php:autorizaceAnotace}. Čtení anotací Nette usnadňuje pomocí objektu \texttt{MethodReflection}\footnote{\Verb{Nette\Application\UI\MethodReflection}}, který je předáván metodě \texttt{checkRequirements()} každého presenteru. Tato metoda je v průběhu životního cyklu presenteru volána několikrát. Poprvé při jeho vytvoření a předává se jí objekt \texttt{ComponentReflection}\footnote{\Verb{Nette\Application\UI\ComponentReflection}} - reflexe aktuálního presenteru - a poté před každým \textit{action}, \textit{handle} a \textit{render} v tomto pořadí s reflexí dané metody. Tímto bylo dosaženo velice efektivního zabezpeční jednotlivých částí presenteru.
 
 \begin{listing}[ht]
 \phpsnippet{tex/code/anotace.php}

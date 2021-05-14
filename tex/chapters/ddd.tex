@@ -9,12 +9,12 @@ Při návrhu aplikace bylo využito zásad Domain Driven Desingu (dále též DD
 \clearpage
 Při srovnání koncepcí vrstev podle MVC/P a DDD lze říci, že se vhodně překrývají, pokud je zajištěno, že Controller neobsauje logiku doménové vrstvy. V~případě MVP pak částečně dochází k prolínání aplikační a prezentační vrstvy, což podle Evanse nehraje zásadní roli, tou je separace doménové vrstvy \cite{EvansDDD}. Dále Evans definuje základními stavební bloky doménové vrstvy následující \cite{EvansDDD}:
 \begin{itemize}
-	\item \textbf{Value Object} - neměnný (immutable) objekt, který reprezentuje nějakou hodnotu / vlastnost. Může to být telefonní číslo ale i poštovní adresa skládající se z několika částí (členských proměnných).
+	\item \textbf{Value Object} - neměnný (immutable) objekt, který reprezentuje nějakou hodnotu / vlastnost. Může to být telefonní číslo, ale i poštovní adresa skládající se z několika částí (členských proměnných).
 	\item \textbf{Entity} - základní objekt, který je jednoznačně identifikován svojí \it{identitou}, jeho vlastnosti mohou být reprezentovány value objekty nebo dalšími entitami, z čehož vznikají agregáty.
 
 	\item \textbf{Aggregate} - skupina entit, která v doméně představuje celek. \it{Root Aggregate} pak představuje vstupní bod pro okolní objekty k agregátovi. Objekty uvnitř agregátu mohou mít libovolné vazby mezi sebou, ale ne na okolní objekty. Převážná část business logiky by se měla odehrávat právě zde.
-	\item \textbf{Module} - logické propojení (v kontextu domény) entit a agregátů vytváří moduly / balíčky.
-	\item \textbf{Factory} - továrny na objekty zapouzdřují proces vytváření nových objektů. Může to být metoda agregátu, která vytváří instance jednotlivých entit a value objektů nebo samostatná třída. Využívá se některého z návrhových vzorů Factory \cite{Vrana2013}\cite{Boehmer2015}
+	\item \textbf{Module} - logické propojení (v kontextu domény) entit a agregátů vytváří moduly
+	\item \textbf{Factory} - továrny na objekty zapouzdřují proces vytváření nových objektů. Může~to být metoda agregátu, která vytváří instance jednotlivých entit a value objektů nebo samostatná třída. Využívá se některého z návrhových vzorů Factory \cite{Vrana2013}\cite{Boehmer2015}
 	\item \textbf{Service} - pokud nějaká operace nedává smysl v rámci jednoho objektu, může být zapouzdřena do samostatného objektu služby.
 	\item \textbf{Repository} - získávání objektů, jejich perzistence (ukládání, mazání) je zapouzdřeno do samostatných repozitářů. 
 \end{itemize}

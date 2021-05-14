@@ -1,7 +1,7 @@
-Na základě shromážděných požadavků na aplikaci v částech \ref{section:pozadavky} a \ref{section:pozadavkyCele} byl sestaven obecný model kritických částí aplikace. Základem volební aplikace je samozřejmě model hlasování. Entita \phpinline{Election} představuje kořen stejnojmeného agregátu (\it{Aggregate Root}). Vazby mezi jednotlivými entitami jsou znázorněny jako diagram modelu v obrázku \ref{fig:ElectionModel}. Jednotlivými entitami tohoto agregátu jsou: 
+Na základě shromážděných požadavků na aplikaci v částech \ref{section:pozadavky} a \ref{section:pozadavkyCele} byl sestaven obecný model kritických částí aplikace. Základem volební aplikace je samozřejmě model hlasování. Entita \phpinline{Election} představuje kořen stejnojmenného agregátu (\it{Aggregate Root}). Vazby mezi jednotlivými entitami jsou znázorněny jako diagram modelu v obrázku \ref{fig:ElectionModel}. Jednotlivými entitami tohoto agregátu jsou: 
 \begin{itemize}
 	\item \textbf{Election} - kořen agregátu představující jedny konkrétní volby / hlasování.
-	\item \textbf{Question} - ve volbách představuje volenou pozici, v obecném hlasování jednu otázku.
+	\item \textbf{Question} - ve volbách představuje volenou pozici, v obecném hlasování jednu~otázku.
 	\item \textbf{Answer} - množina kandidátů, resp. odpovědí na otázku.
 	\item \textbf{Voter} - zahrnuje všechny oprávněné voliče.
 	\item \textbf{Ballot} - všechny odevzdané hlasovací lístky v daných volbách / hlasování.
@@ -11,7 +11,7 @@ Na základě shromážděných požadavků na aplikaci v částech \ref{section:
 	\centering
 	\includegraphics[width=0.6\linewidth]{svg/ElectionModelFull.eps}
 	\captionsetup{width=0.6\linewidth}
-	\caption[Model objektů balíčku Election]{Model objektů balíčku Election (zdroj: vlastní)}
+	\caption[Model objektů balíčku Election]{Model objektů balíčku Election \\(zdroj: vlastní)}
 	\label{fig:ElectionModel}
 \end{figure}
 

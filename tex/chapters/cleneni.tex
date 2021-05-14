@@ -18,16 +18,16 @@ Zjednodušená adresářová struktura je zobrazena v příloze \ref{priloha:adr
 \end{itemize}
 
 \n{3}{Fyzické oddělení} \label{section:fyzickeOddeleni}
-Prvním krokem zabezpečení neveřejné části webu je samozřejmě omezení přístupu heslem přímo v aplikaci. Přihlašovací formulář je nicméně stále veřejný a kdokoli s~odkazem na přihlašovací stránku se může pokoušet o přihlášení. Druhým krokem tedy může být omezení přístupu pomocí IP adres (například pouze na adresy vnitřní sítě UTB) a to pomocí nastavení HTTP serveru souborem \tt{.htaccess} nebo v~konfiguraci \tt{virtualhost}. Toto nastavení je přenecháno ke zvážení tomu, kdo bude zodpovědný za instalaci a nastavení serveru.
+Prvním krokem zabezpečení neveřejné části webu je samozřejmě omezení přístupu heslem přímo v aplikaci. Přihlašovací formulář je nicméně stále veřejný a kdokoli s~odkazem na přihlašovací stránku se může pokoušet o přihlášení. Druhým krokem tedy může být omezení přístupu pomocí IP adres (například pouze na adresy vnitřní sítě UTB) a to pomocí nastavení HTTP serveru souborem \texttt{.htaccess} nebo v~konfiguraci \texttt{virtualhost}. Toto nastavení je přenecháno ke zvážení tomu, kdo bude zodpovědný za instalaci a nastavení serveru.
 
-Aby veškeré odkazy v aplikaci fungovaly a aby Nette vědělo kam má směřovat požadavky, bylo potřeba upravit základní routování popsané v části \ref{section:routovani}. Routy podporují tzv. moduly, které slouží přesně k takovému rozdělení aplikace na několik oddělených částí. Pro každý modul je možné definovat vlastní routy, seskupení rout do modulů se provádí voláním metody \phpinline{withModule(string $module)} %$ 
+Aby veškeré odkazy v aplikaci fungovaly a aby Nette vědělo, kam má směřovat požadavky, bylo potřeba upravit základní routování popsané v části \ref{section:routovani}. Routy podporují tzv. moduly, které slouží přesně k takovému rozdělení aplikace na několik oddělených částí. Pro každý modul je možné definovat vlastní routy, seskupení rout do modulů se provádí voláním metody \phpinline{withModule(string $module)} %$ 
 třídy \phpinline{RouteList}. 
 
 \bigskip
 
 Rozšířené nastavení routování je patrné z fragmentu \ref{php:newRoute}. Obsahuje nastavení pro lokální testování (admin.volby.l) i simulaci produkčního prostředí na VPS serveru v~internetu (admin.volby.lukasrichter.eu). Pro modul Backend bylo potřeba rozlišit jednotlivá prostředí podle názvu serveru kvůli použití domény čtvrtého řádu, se kterou si Router neporadil. Pro modul Frontend toto nebylo potřeba, doména třetího řádu (volby.lukasrichter.eu) fungovala v pořádku. 
 
-Zápis \phpinline{addRoute('/prihlasit', 'Sign:in')} definuje alias pro akci \tt{in} presenteru \tt{SignPresenter}, která je standardně dostupná pod adresou \tt{/sign/in}.
+Zápis \phpinline{addRoute('/prihlasit', 'Sign:in')} definuje alias pro akci \texttt{in} presenteru \texttt{SignPresenter}, která je standardně dostupná pod adresou \texttt{/sign/in}.
 \clearpage
 
 \begin{listing}[ht]
@@ -36,6 +36,6 @@ Zápis \phpinline{addRoute('/prihlasit', 'Sign:in')} definuje alias pro akci \tt
 \label{php:newRoute}
 \end{listing}
 
-S tímto nastavením jsou jednotlivé části aplikace dostupné ze samostaných domén (např. admin.volby.utb.cz a volby.utb.cz), které nemusí být fyzicky na stejném serveru. Právě toto dokáže podstatně zvýšit bezpečnost aplikace. Frontendová část (volby.utb.cz) je umístěna na bežném veřejně přístupném serveru, zatímco Backendová část je umístěna na serveru, který nemusí být vůbec dostupný z~internetu. Samozřejmě může být rozdílná i samotná doména nižšího řádu, za~předpokladu, že jsou správně nastaveny DNS záznamy.
+S tímto nastavením jsou jednotlivé části aplikace dostupné ze samostaných domén (např. admin.volby.utb.cz a volby.utb.cz), které nemusí být fyzicky na stejném serveru. Právě toto dokáže podstatně zvýšit bezpečnost aplikace. Frontendová část (volby.utb.cz) je umístěna na bežném veřejně přístupném serveru, zatímco Backendová část je umístěna na serveru, který nemusí být vůbec dostupný z~internetu. Samozřejmě může být rozdílná i samotná doména nižšího řádu za~předpokladu, že jsou správně nastaveny DNS záznamy.
 
 A jelikož jsou obě části na sobě nezávislé, není nutné na veřejně dostupném Frontendu umisťovat backendový kód, který obsahuje například zpracování, dešifrování a počítání odevzdaných hlasů, ale i aktivaci a mazání celých voleb. V~případě útoku na aplikaci s cílem kompromitovat nebo ovlivnit volby, nemají útočníci možnost tento kód spustit. Museli by tedy útočit přímo na databázový server, jehož zabezpečení je v komptenci administrátora serveru. Požadavky databázového serveru ze strany aplikace jsou uvedeny v příloze \ref{priloha:pozadavky}.

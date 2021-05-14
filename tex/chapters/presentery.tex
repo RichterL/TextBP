@@ -1,4 +1,4 @@
-V aplikaci se nachází tři skupiny presnterů, podle příslušnosti k modulu: Core, Backend a Frontend. Šablony pro konkrétní Presenter jsou ve společném adresáři \tt{templates/jmenoPresenteru/} a název souboru každé šablony odpovídá akci daného presenteru. Pokud akce nevede na vykreslení šablony, nemusí mít šablonu vůbec vytvořenou. Příkladem je \tt{Sign:out} (\it{SignPresenter} a akce \it{out}), která přihlášeného uživatele odhlásí a přesměruje na přihlašovací formulář \tt{Sign:in} (stejný presenter, akce \textit{In}). SignPresenter obsahuje metodu \phpinline{renderIn} a tedy vyžaduje i šablonu \tt{templates/Sign/in.latte}
+V aplikaci se nachází tři skupiny presnterů podle příslušnosti k modulu: Core, Backend a Frontend. Šablony pro konkrétní Presenter jsou ve společném adresáři \tt{templates/jmenoPresenteru/} a název souboru každé šablony odpovídá akci daného presenteru. Pokud akce nevede na vykreslení šablony, nemusí mít šablonu vůbec vytvořenou. Příkladem je \tt{Sign:out} (\it{SignPresenter} a akce \it{out}), která přihlášeného uživatele odhlásí a přesměruje na přihlašovací formulář \tt{Sign:in} (stejný presenter, akce \textit{In}). SignPresenter obsahuje metodu \phpinline{renderIn} a tedy vyžaduje i šablonu \tt{templates/Sign/in.latte}
 
 %--------------%
 %--------------%
@@ -27,7 +27,8 @@ V aplikaci se nachází tři skupiny presnterů, podle příslušnosti k modulu:
 Dostupné akce:
 \begin{itemize}
 	\item \tt{Sign:in} Zobrazí přihlašovací formulář\\
-Nemá definované metody action ani render - ekvivalentní by byly prázdné metody. Jediným úkolem této metody je zobrazit formulář pro přihlášení, který se vytváří metodou \phpinline{SignPresenter::createComponentSignInForm()}. Po~odeslání formuláře se volá opět tato akce, nicméně se provede i callback formuláře \phpinline{SignPresenter::signInFormSuccess()}. V tomto callbacku se aplikace pokusí o přihlášení uživatele pomocí poskytnutých údajů. Presenter je předá třídě implementující rozhraní \phpinline{Nette\Security\IAuthenticator}. Princip přihlašování je popsán v části \ref{section:prihlasovani}. Na tuto akci zároveň odkazují všichni potomci BasePresenter z metody \phpinline{BasePresenter::checkRequirements()}, pokud se uživatel pokusí provést jakoukoli akci jako nepřihlášený (např. po~vypršení session).
+Nemá definované metody action ani render - ekvivalentní by byly prázdné metody. Jediným úkolem této metody je zobrazit formulář pro přihlášení, který se vytváří metodou \phpinline{SignPresenter::createComponentSignInForm()}.\\
+Po~odeslání formuláře se volá opět tato akce, nicméně se provede i callback formuláře \phpinline{SignPresenter::signInFormSuccess()}. V tomto callbacku se aplikace pokusí o přihlášení uživatele pomocí poskytnutých údajů. Presenter je předá třídě implementující rozhraní \phpinline{Nette\Security\IAuthenticator}. Princip přihlašování je popsán v části \ref{section:prihlasovani}. Na tuto akci zároveň odkazují všichni potomci BasePresenter z metody \phpinline{BasePresenter::checkRequirements()}, pokud se uživatel pokusí provést jakoukoli akci jako nepřihlášený (např. po~vypršení session).
 	\item \tt{Sign:out} Odhlásí uživatele\\
 Uživatel po kliknutí na odkaz ,,Odhlásit'' vyvolá akci tuto akci, kdy je odhlášen a následně přesměrován na přihlašovací formulář -- \tt{Sign:in}. Tato akce nemá render metodu ani šablonu (dochází k přesměrování, které předchází jakémukoli výstupu a ukončuje aktuální cyklus aplikace).
 \end{itemize}
@@ -48,7 +49,7 @@ Metoda \phpinline{checkRequirements()} slouží k ověření, že je uživatel p
 
 Formulář \phpinline{VotingForm} je samostatnou třídou rošiřující \phpinline{Control}\footnote{\Verb{Nette\Application\UI\Control}} - v názvosloví Nette komponentou. Komponenty mohou mít vlastní šablony, což umžňuje zpřehlednit šablonu presenteru pokud není celý formulář vykreslován automaticky přes \phpinline{FormRenderer}. Zároveň je i samotný kód presenteru jednodušší, o vytvoření formuláře, validaci a zpracování se totiž stará třída formuláře.
 
-Hlasovací formulář neobsahuje žádnou logiku pro validaci ani zpracování odeslaných dat. Veškerá validace probíhá pomocí JavaScriptu na straně klienta a data se odesílají teprve po zašifrování a to přímo na presenter pomocí AJAX. Zpracování těchto požadavků (signálů) pomocí handle metod je popsáno v samostatné části~\ref{section:zpracovaniHlasu}~věnované zpracování hlasovacích lístků.
+Hlasovací formulář neobsahuje žádnou logiku pro validaci ani zpracování odeslaných dat. Veškerá validace probíhá pomocí JavaScriptu na straně klienta a data se odesílají teprve po zašifrování, a to přímo na presenter pomocí AJAX. Zpracování těchto požadavků (signálů) pomocí handle metod je popsáno v samostatné části~\ref{section:zpracovaniHlasu}~věnované zpracování hlasovacích lístků.
 
 
 %--------------%
@@ -91,19 +92,19 @@ Tato část obsahuje nástroje pro správu uživatelů, uživatelských oprávn�
 %--------------%
 \paragraph{ElectionPresenter} nabízí detailní přehled konkrétních voleb rozdělený do záložek. Některé záložky se zobrazují pouze pokud se volby nacházejí v určitém stavu. Záložka výsledky se například zobrazí až po ukončení voleb. 
 
-V záhlaví detailu se nachází kontextové menu, které umožňuje volby (de)aktivovat, nahrávat seznamy voličů a klíče volební komise. Aktivace voleb způsobí jejich zobrazení voličům, hlasování je umožněno až v řádném termínu. Po aktivaci voleb není možné měnit jejich nastavení, ale lze je opět deaktivovat. Aktivovat a deaktivovat volby lze pouze pokud se nenacházejí v průběhu jejich konání. Po skončení voleb se voličům ukazují pouze výsledky a to do doby než jsou deaktivovány.
+V záhlaví detailu se nachází kontextové menu, které umožňuje volby (de)aktivovat, nahrávat seznamy voličů a klíče volební komise. Aktivace voleb způsobí jejich zobrazení voličům, hlasování je umožněno až v řádném termínu. Po aktivaci voleb není možné měnit jejich nastavení, ale lze je opět deaktivovat. Aktivovat a deaktivovat volby lze pouze pokud se nenacházejí v průběhu jejich konání. Po skončení voleb se voličům ukazují pouze výsledky, a to do doby než jsou deaktivovány.
 
 Jednotlivými záložkami jsou:
 \begin{itemize}
-	\item \b{Overview}, kde se zobrazuje formátovaný popis voleb a tři pole s šifrovacími klíči (pokud jsou dostupné). Těmito klíči jsou: privátní a veřejný klíč volební komise a veřejný podpisový klíč serveru.
-	\item \b{Results} s výsledky voleb. Tato záložka je distupná pouze po ukončení voleb. V~případě, že dosud nejsou spočítané výsledky, je nabídnuto jejich spočítání a~následně se již zobrazují pouze výsledky v přehledných grafech.
-	\item \b{Questions} zobrazí grid otázek definovaných pro dané volby. Otázkou může být volená pozice, její odpověďmi pak jména kandidátů. Při založení nové otázky je možné nastavit minimální a maximální počet otázek, zda je odpověď povinná a~jednotlivé odpovědi. V gridu je možné otázky editovat a mazat.
+	\item \b{Overview} - zobrazuje formátovaný popis voleb a tři pole s šifrovacími klíči (pokud jsou dostupné). Těmito klíči jsou: privátní a veřejný klíč volební komise a veřejný podpisový klíč serveru.
+	\item \b{Results} - výsledky voleb. Tato záložka je dostupná pouze po ukončení voleb. V~případě, že dosud nejsou spočítané výsledky, je nabídnuto jejich spočítání a~následně se již zobrazují pouze výsledky v přehledných grafech.
+	\item \b{Questions} - zobrazí grid otázek definovaných pro dané volby. Otázkou může být volená pozice, její odpověďmi pak jména kandidátů. Při založení nové otázky je možné nastavit minimální a maximální počet otázek, zda je odpověď povinná a~jednotlivé odpovědi. V gridu je možné otázky editovat a mazat.
 	
-	\item \b{Answers} obsahuje grid všech odpovědí, které byly definované při zakládání otázek, zde je možné odpovědi mazat.
+	\item \b{Answers} - obsahuje grid všech odpovědí, které byly definované při zakládání otázek, zde je možné odpovědi mazat.
 	
-	\item \b{Voter list} zobrazí grid s aktivním seznamem voličů.
+	\item \b{Voter list} - zobrazí grid s aktivním seznamem voličů.
 	
-	\item \b{Voter files} v tomto gridu se nachází všechny soubory se seznamem voličů, které byly pro dané volby nahrány. Soubory je možno prohlížet, mazat, stáhnout a~aplikovat vybraný soubor jako aktivní seznam voličů. Nový soubor lze nahrát přes kontextové menu v záhlaví.
+	\item \b{Voter files} - v tomto gridu se nachází všechny soubory se seznamem voličů, které byly pro dané volby nahrány. Soubory je možno prohlížet, mazat, stáhnout a~aplikovat vybraný soubor jako aktivní seznam voličů. Nový soubor lze nahrát přes kontextové menu v záhlaví.
 	
 \end{itemize}
 

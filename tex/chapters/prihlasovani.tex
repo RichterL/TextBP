@@ -2,7 +2,7 @@ Přihlašování uživatelů probíhá identickým způsobem pro Frontend i Back
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=\linewidth]{svg/mockup/prihlasovani.eps}
+	\includegraphics[width=\linewidth]{svg/mockup/prihlasovani.png}
 	\captionsetup{width=\linewidth}
 	\caption[Vzhled přihlašovacího formuláře]{Vzhled přihlašovacího formuláře (zdroj: vlastní, Freepik.com)}
 	\label{mockup:login}
@@ -10,9 +10,9 @@ Přihlašování uživatelů probíhá identickým způsobem pro Frontend i Back
 
 K ověření (autentizaci) uživatele pomocí kombinace uživatelského jména (e-mailové adresy) a hesla v Nette slouží rozhraní \texttt{Authenticator}\footnote{\Verb{Nette\Security\Authenticator}}. Samotný proces ověření inicializuje objekt \texttt{User}\footnote{\label{user}\Verb{Nette\Security\User}}. 
 
-SignPresenter po odeslání formuláře předá objektu \texttt{User} implementaci rozhraní a následně zavolá metodu \phpinline{User::login($username, $password)}. Pokud ověření selže, je vyvolána výjimka \texttt{AuthenticationException}, která je zachycena v presenteru. Úspěšná autentizace způsobí uložení implementace \texttt{IIdentity} do objektu \texttt{User}.
+SignPresenter po odeslání formuláře předá objektu \texttt{User} implementaci rozhraní a~následně zavolá metodu \phpinline{User::login($username, $password)}. Pokud ověření selže, je vyvolána výjimka \texttt{AuthenticationException}, která je zachycena v presenteru. Úspěšná autentizace způsobí uložení implementace \texttt{IIdentity} do objektu \texttt{User}.
 
-Jedním z požadavků na aplikaci byla stanovena možnost přihlášení voličů pomocí univerzitních e-mailových adres. Implementace ověřování metodou Single Sign-On přes systém Shibboleth by byla nad rámec této práce a po diskuzi s vedoucím práce bylo zvoleno ověřování pomocí Active Directory přes LDAP. Dalším požadavkem byla možnost přihlášení externích uživatelů bez nutnosti vytvářet jim univerzitní e-mailové adresy. Tohoto bylo docíleno možností ověření vůči databázi aplikace.
+Jedním z požadavků na aplikaci byla stanovena možnost přihlášení voličů pomocí univerzitních e-mailových adres. K přihlašování univerzitních uživatelů byla zvolena implementace ověřování pomocí Active Directory přes LDAP. Dalším požadavkem byla možnost přihlášení externích uživatelů bez nutnosti vytvářet jim univerzitní e-mailové adresy. Tohoto bylo docíleno možností ověření vůči databázi aplikace.
 \clearpage
 \begin{listing}[ht]
 \phpsnippet{tex/code/autentizace.php}
