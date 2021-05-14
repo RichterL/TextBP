@@ -4,6 +4,8 @@ V aplikaci se nachází tři skupiny presnterů, podle příslušnosti k modulu:
 %--------------%
 
 \n{3}{Frontend}
+
+%--------------%
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\linewidth]{svg/frontendPresenters.eps}
@@ -11,7 +13,6 @@ V aplikaci se nachází tři skupiny presnterů, podle příslušnosti k modulu:
 	\caption[Třídy Presenter frontendové části]{Třídy Presenter frontendové části (zdroj: vlastní)}
 	\label{fig:FrontendPresenters}
 \end{figure}
-%--------------%
 \clearpage
 \paragraph{SignPresenter} Jediným úkolem tohoto presenteru je uživateli poskytnout možnosti přihlášení a odhlášení.
 
@@ -23,7 +24,6 @@ V aplikaci se nachází tři skupiny presnterů, podle příslušnosti k modulu:
 	in & - & - & in.latte \\
 	out & actionOut & - & - \\
 }
-
 Dostupné akce:
 \begin{itemize}
 	\item \tt{Sign:in} Zobrazí přihlašovací formulář\\
@@ -36,7 +36,7 @@ Uživatel po kliknutí na odkaz ,,Odhlásit'' vyvolá akci tuto akci, kdy je odh
 %--------------%
 \paragraph{BasePresenter} je abstraktní třída, která je společným předkem pro všechny presentery, které jsou dostupné pouze po přihlášení. Také obsahuje metody, které jsou užitečné pro všechny presentery obecně. Vzhledem k tomu, že se jedná o abstraktní presenter, nemá žádné metody action, render ani vlastní šablony. 
 Metoda \phpinline{checkRequirements()} slouží k ověření, že je uživatel přihlášen. Rozšiřuje rodičovskou metodu, která detekuje CSRF\footnote{Cross-Site Request Forgery} útoky, je tedy nezbytné zahrnout \phpinline{parent::checkRequirements($element)}%$
-. Aby bylo zajištěno správné zobrazení krátkých stavových zpráv \it{flashMessage} a modálních oken během AJAXových požadavků, je zde i metoda \phpinline{beforeRender()}, která se volá vždy před metodami \phpinline{render}.
+. Aby bylo zajištěno správné zobrazení krátkých stavových zpráv \it{flashMessage} a modálních oken během AJAX požadavků, je zde i metoda \phpinline{beforeRender()}, která se volá vždy před metodami \phpinline{render}.
 
 
 %--------------%
@@ -54,13 +54,14 @@ Hlasovací formulář neobsahuje žádnou logiku pro validaci ani zpracování o
 %--------------%
 \paragraph{ResultsPresenter} je velice jednoduchý presenter, který opět pomocí metod \phpinline{actionDefault()} a \phpinline{renderDefault()} získá a zpřístupní objekt \phpinline{Election} šabloně k~zobrazení výsledků hlasování / voleb.
 
+
+
 %--------------%
 %--------------%
 \n{3}{Backend}
 
-Tato část obsahuje nástroje pro správu uživatelů, uživatelských oprávnění a~především voleb samotných. Je hojně využíváno formulářů a interaktivních tabulek (neboli datagridů). Formuláře a datagridy jsou samostatné komponenty\footnote{třídy rozšiřující \phpinline{Nette\Application\UI\Control}}. Jednoduché komponenty jsou zpravidla vytvářeny přímo v Presenteru. Složitější chování nebo obsáhlé komponenty je vhodnější oddělit do samostatné třídy. Podrobněji jsou datagridy popsány v části \ref{section:Datagridy}.
 
-Datagridy jsou vytvářeny pomocí třídy \phpinline{App\Backend\Utils\DataGrid\Datagrid}, která zefektivňuje způsob vytváření jednotlivých gridů díky zapouzdření často používaných konstrukcí. Tím se nejen výsledný kód v presenterech zjednoduší, ale zároveň gridy napříč aplikací mají stejné chování a na všechny se aplikuje stejná logika. Tímto přístupem se také podstatně usnadní změny ovlivňující všechny gridy - například změna ikony se projeví všude.
+Tato část obsahuje nástroje pro správu uživatelů, uživatelských oprávnění a~především voleb samotných. Je hojně využíváno formulářů a interaktivních tabulek (neboli datagridů). Formuláře a datagridy jsou samostatné komponenty\footnote{třídy rozšiřující \phpinline{Nette\Application\UI\Control}}. Jednoduché komponenty jsou zpravidla vytvářeny přímo v Presenteru. Složitější chování nebo obsáhlé komponenty je vhodnější oddělit do samostatné třídy. Podrobněji jsou datagridy popsány v části \ref{section:Datagridy}.
 
 \begin{figure}[h]
 	\centering
@@ -69,6 +70,7 @@ Datagridy jsou vytvářeny pomocí třídy \phpinline{App\Backend\Utils\DataGrid
 	\caption[Třídy Presenter backendové části]{Třídy Presenter backendové části (zdroj: vlastní)}
 	\label{fig:BackendPresenters}
 \end{figure}
+\clearpage
 
 %--------------%
 \paragraph{SignPresenter} slouží ke správě přihlášení do aplikace, v zásadě se jedná o obdobu frontendového \phpinline{SignPresenter}. Popis této třídy je tedy identický.
@@ -104,6 +106,7 @@ Jednotlivými záložkami jsou:
 	\item \b{Voter files} v tomto gridu se nachází všechny soubory se seznamem voličů, které byly pro dané volby nahrány. Soubory je možno prohlížet, mazat, stáhnout a~aplikovat vybraný soubor jako aktivní seznam voličů. Nový soubor lze nahrát přes kontextové menu v záhlaví.
 	
 \end{itemize}
+
 
 %--------------%
 \paragraph{UsersPresenter} jednoduchý presenter s gridem uživatelů a formulářem pro přidávání / editaci uživatelů. Formulář umožňuje uživatelům přidělovat role i změnit heslo. Aplikace neobsahuje žádný registrační formulář, nové uživatele musí vždy přidávat osoba s patřičným oprávněním - pravděpodobně administrátor aplikace. Jak bylo popsáno v části \ref{section:prihlasovani}, není potřeba zakládat uživatelské účty voličům, ale pouze osobám, kterým je potřeba navýšit oprávnění.

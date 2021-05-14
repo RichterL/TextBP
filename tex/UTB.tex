@@ -405,13 +405,15 @@
 \newcommand{\zadani}{
 	\clearpage
 	\thispagestyle{empty}
-\voffset=\valueVOffset\evensidemargin=\valueSideMargin\oddsidemargin=\valueSideMargin\headsep=\valueHeadSep\headheight=\valueHeadHeight\setlength{\parskip}{3pt}\textheight=\valueTextHeight\textwidth=\valueTextWidth
+\voffset=\valueVOffset
+\hoffset=0pt
+\evensidemargin=0pt\oddsidemargin=0pt\headsep=0pt\headheight=0pt
+\setlength{\parskip}{3pt}\setlength{\parindent}{0pt}
 
 \begin{figure*}[tp]
   \noindent\makebox[\textwidth]{%
 	\includegraphics[height=\textheight]{graphics/zadani_A.png}}
 \end{figure*}
-
 
 \clearpage
 \thispagestyle{empty}
@@ -514,7 +516,7 @@
 	\vspace{1cm}
 	Klíčová slova: \klicovaslovacz
 	
-	\vspace{3cm}
+	\vspace{2cm}
 	
 	\nns{Abstract}
 	\abstrakten

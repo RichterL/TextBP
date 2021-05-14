@@ -1,31 +1,45 @@
 \subsection*{Založení}
 \begin{itemize}
-	\item Kliknutím na tlačítko vytvoření nových voleb (v záhlaví datagridu) je zobrazen formulář pro editaci voleb (Obrázek PII.1).
-	\begin{figure}[h]
+	\item Kliknutím na tlačítko vytvoření nových voleb (v záhlaví datagridu) je zobrazen formulář pro editaci voleb (Obrázek III.1).
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=\linewidth]{tex/attachements/noveVolbyForm.png}
+	\includegraphics[width=\linewidth]{graphics/attachements/noveVolbyForm.png}
 	\captionsetup{width=\linewidth}
-	\caption*{Obrázek P II.1 Formulář založení nových voleb (zdroj: vlastní)}
+	\caption*{Obrázek III.1 Formulář založení nových voleb (zdroj: vlastní)}
 \end{figure}
-	\item Po vyplnění a odeslání formuláře lze uložené hodnoty upravit pomocí editačního tlačítka na příslušném řádku v datagridu (Obrázek PII.2).
+	\item Po vyplnění a odeslání formuláře lze uložené hodnoty upravit pomocí editačního tlačítka na příslušném řádku v datagridu (Obrázek III.2).
 	\item Na detail voleb lze přejít kliknutím na tlačítko detailu v příslušném řádku datagridu.
-	\begin{figure}[h]
+\begin{figure}[h]
 	\centering
-	\includegraphics[width=\linewidth]{tex/attachements/noveVolbyGrid.png}
+	\includegraphics[width=\linewidth]{graphics/attachements/noveVolbyGrid.png}
 	\captionsetup{width=\linewidth}
-	\caption*{Obrázek P II.2 Řádek datagridu (zdroj: vlastní)}
+	\caption*{Obrázek III.2 Řádek datagridu (zdroj: vlastní)}
 \end{figure}
 \end{itemize}
 
+\clearpage
 
-
-
-
+\subsection*{Detail voleb}
+Na obrázku III.3 je zobrazen detail voleb, na červená čísla bude odkazováno dále v textu.
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\linewidth]{graphics/attachements/noveVolbyDetail.png}
+	\captionsetup{width=\linewidth}
+	\caption*{Obrázek III.3 Řádek datagridu (zdroj: vlastní)}
+\end{figure}
 
 \subsection*{Otázky}
-Nastavení otázek se provádí na záložce \textit{Questions}. Již přidané otázky jsou zobrazeny v~datagridu a lze je upravovat. Nové otázky se přidávají tlačítkem v záhlaví datagridu. Název otázky slouží pro orientaci v seznamu definovaných otázek, voliči není zobrazen. Každá otázka musí mít nastaven minimální a maximální možný počet odpovědí. Limit se při validaci aplikuje pouze pokud je vybrána alespoň jedna odpověď. Pro nepovinné otázky tedy není nutné zadávat limit 0 (aplikace to ani nepovolí). Dalšími poli jsou text samotné otázky a nastavení zda je odpověď na otázku vyžadována. 
+Nastavení otázek se provádí na záložce \textit{Questions} \koment{1}\;. Již přidané otázky jsou zobrazeny v~datagridu a lze je upravovat. Nové otázky se přidávají tlačítkem v záhlaví datagridu. Název otázky slouží pro orientaci v seznamu definovaných otázek, voliči není zobrazen. Každá otázka musí mít nastaven minimální a maximální možný počet odpovědí. Limit se při validaci aplikuje pouze pokud je vybrána alespoň jedna odpověď. Pro nepovinné otázky tedy není nutné zadávat limit 0 (aplikace to ani nepovolí). Dalšími poli jsou text samotné otázky a nastavení zda je odpověď na otázku vyžadována. 
 
 Toto umožňuje dvojí řešení, pokud je vyžadována možnost zdržet se volby (hlasování). Nepovinná otázka umožňuje neodpovídat, ale ve výsledcích voleb není zohledněno, že volič se rozhodl neodpovědět (jinak než porovnáním počtu ostatních možností a~odevzdaných hlasů). Druhým řešením je volbu ,,Zdržel se'' zavést jako jednu z možných odpovědí. V takovém případě bude zohleděna tato volba i ve výsledcích. Obdobně by se dalo dívat i na odpověďi ,,Nechci odpovídat'', ,,Nevím'' apod.
+\clearpage
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.5\linewidth]{graphics/attachements/questionFormCut.png}
+	\captionsetup{width=0.5\linewidth}
+	\caption*{Obrázek III.3 Formulář otázek \\(zdroj: vlastní)}
+\end{figure}
+
 
 V poslední části formuláře je možné přidávat jednotlivé odpovědi. 
 \begin{itemize}
@@ -41,21 +55,29 @@ Tyto metody je ideální volat v místě vytváření formuláře, tedy v~\phpin
 
 \end{itemize}
 
-Po odeslání formuláře jsou data uložena a otázky i odpovědi je možné upravit opět pomocí editačního tlačítka. Celou otázku lze smazat červeným tlačítkem odpoadkového koše. Jednotlivé odpovědi lze mazat ze samostatné záložky \textit{Answers}.
+Po odeslání formuláře jsou data uložena a otázky i odpovědi je možné upravit opět pomocí editačního tlačítka. Celou otázku lze smazat červeným tlačítkem odpoadkového koše. Jednotlivé odpovědi lze mazat ze samostatné záložky \textit{Answers} \koment{2}\;.
 
 \subsection*{Seznam voličů}
-Seznam voličů vzniká z CSV souboru nahraného prostřednictvím aplikace. 
+Seznam voličů vzniká z CSV souboru nahraného prostřednictvím aplikace. Soubor by měl obsahovat pouze řádky (žádné záhlaví) o třech hodnotách - jméno, příjmení a e-mail.
 \begin{itemize}
-	\item Aktuální seznam voličů je dostupný přes záložku \textit{Voter List}.
-	\item Na záložce \textit{Voter Files} je seznam již nahraných souborů.
+	\item Aktuální seznam voličů je dostupný přes záložku \textit{Voter List} \koment{3}\;.
+	\item Na záložce \textit{Voter Files} \koment{4}\;je seznam již nahraných souborů.
 	\item Nové soubory lze nahrát prostřednictvím kontextového menu dostupného po~kliknutí na ikonu ozubeného kola.
 	\item Kterýkoli z nahraných souborů lze aplikovat pro dané volby kliknutím na zelené tlačítko ,,Apply''.
 	\item Nahrané soubory lze také smazat nebo stáhnout do počítače a zobrazit jejich obsah.
 	\item Smazání nahraného souboru neovlivní již aplikovaný seznam voličů.
 \end{itemize}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=1\linewidth]{graphics/attachements/noveVolbySeznam.png}
+	\captionsetup{width=1\linewidth}
+	\caption*{Obrázek III.4 Seznam voličů (zdroj: vlastní)}
+\end{figure}
+\clearpage
+
 \subsection*{Spuštění voleb}
-Před aktivací voleb je nutné nahrát veřejnou část RSA klíče volební komise prostřednictvím kontextového menu (ozubené kolo). Tento klíč by měl být uložen na~bezpečném místě a volební komise by měla zajistit jeho patřičnou zálohu v případě ztráty nebo poškození originálu. Není možné použít klíč chráněný heslem (použitá knihovna \texttt{phpseclib} použití takového klíče nicméně umožňuje a aplikace by k tomu mohla být upravena). Úspěšně nahraný klíč je viditelný na záložce \textit{Overview} v~tabulce s šifrovacími klíči.
+Před aktivací voleb je nutné nahrát veřejnou část RSA klíče volební komise prostřednictvím kontextového menu  \koment{5}\;. Tento klíč by měl být uložen na~bezpečném místě a volební komise by měla zajistit jeho patřičnou zálohu v případě ztráty nebo poškození originálu. Není možné použít klíč chráněný heslem (použitá knihovna \texttt{phpseclib} použití takového klíče nicméně umožňuje a aplikace by k tomu mohla být upravena). Úspěšně nahraný klíč je viditelný na záložce \textit{Overview} \koment{6}\;v~tabulce s šifrovacími klíči.
 
 V tuto chvíli je možné volby aktivovat opět prostřednictvím ozubeného kola.
 
@@ -64,8 +86,8 @@ V tuto chvíli je možné volby aktivovat opět prostřednictvím ozubeného kol
 \begin{itemize}
 	\item Po skončení období nastaveného pro dané volby jsou zpřístupněny další akce na~detailu voleb.
 	\item Přes kontextové menu je nyní možné nahrát privátní část klíče volební komise.
-	\item Po úspěšném nahrání klíče je tento také vidět na záložce \textit{Overview}
-	\item Kliknutím na tlačítko ,,Decrypt and count ballots'' na záložce \textit{Results} jsou spočítány odevzdané hlasy
+	\item Po úspěšném nahrání klíče je tento také vidět na záložce \textit{Overview} \koment{6}
+	\item Kliknutím na tlačítko ,,Decrypt and count ballots'' na záložce \textit{Results} \koment{7}\;jsou spočítány odevzdané hlasy
 	\item Výsledky voleb jsou zobrazovány i voličům
 	\item Pomocí kontextového menu je možné stáhnout volební protokol
 	\item Volby je možné deaktivovat přes kontextové menu, neaktivní volby se již nezobrazují voličům.

@@ -1,10 +1,12 @@
 Šablony (\textit{templates}) jsou součástí zobrazovací vrstvy (View) aplikace a jejich účelem je prezentovat uživateli data z aplikační a doménové vrstvy v lidské podobě. Pro jednoduchost popisu byly do této části zařazeny i kaskádové styly (CSS) a JavaScript (JS), přestože nejsou ve striktním podání šablonami.
 
+Vzhledem k použití Nette byla volba šablonovacího systému velice snadná, jelikož Nette a Latte se vhodně doplňují a navzájem jsou 100\% kompatibilní. Použití Latte zároveň přináší výhody v podobě bezpečnější aplikace bez nutnosti implementovat různá bezpečnostní opatření, Nette a Latte je již obsahují.
+
 Jak již bylo popsáno, šablona je těsně navázána na presenter a jeho akci. I pokud presenter nemá definované žádné metody akce (\texttt{action}, \texttt{render}), pokud existuje šablona, může být zobrazena. Každá šablona musí být umístěna v adresáři, který se shoduje s názvem presenteru a název souboru šablony musí odpovídat názvu akce. Prázdná (relativní) URL adresa webu směřuje na HomepagePresenter a jeho akci default. Pokud má existovat i výstup pro danou adresu, šablona \texttt{default.latte} bude umístěna do adresáře \texttt{templates/Homepage/}, přičemž adresář \texttt{templates} je na stejné úrovni jako adresář obsahující presentery.
 
-Výstupem šablony je nejčastěji HTML kód zobrazený v prohlížeči. Nette umožňuje vykreslovat i samostatné části šablon zvané \textit{snippety} \cite{NetteDocs}, čehož je hojně využíváno pro AJAXové požadavky. Presenter po zpracování AJAX požadavku může jako odpověd poslat pouze část šablony ve formě JSON řetězce, který zpracuje JavaScriptová knihovna Naja a vloží na konkrétní místo v HTML dokumentu, který má prohlížeč již načtený. Tímto se podstatně snižuje objem přenesených dat, ale především rychlost načtení požadovaného obsahu. Na uživatele aplikace zároveň působí svižně, jelikož nedochází k překreslování celého obsahu prohlížečem, změní se pouze ta část dokumentu, která je definovná jako snippet.
+Výstupem šablony je nejčastěji HTML kód zobrazený v prohlížeči. Nette umožňuje vykreslovat i samostatné části šablon zvané \textit{snippety} \cite{NetteDocs}, čehož je hojně využíváno pro AJAX požadavky. Presenter po zpracování AJAX požadavku může jako odpověd poslat pouze část šablony ve formě JSON řetězce, který zpracuje JavaScriptová knihovna Naja a vloží na konkrétní místo v HTML dokumentu, který má prohlížeč již načtený. Tímto se podstatně snižuje objem přenesených dat, ale především rychlost načtení požadovaného obsahu. Na uživatele aplikace zároveň působí svižně, jelikož nedochází k překreslování celého obsahu prohlížečem, změní se pouze ta část dokumentu, která je definovná jako snippet.
 
-Snippety jsou v aplikaci použity pro formuláře, datagridy a další. Detail konkrétních voleb obsahuje jednotlivé záložky, které také využívají snippetů a~AJAXových požadavků. Knihovna Naja navíc umí simulovat historii prohlížení i~změnou URL adresy v adresním řádku prohlížeče, zároveň funguje i možnost v~historii listovat pomocí příkazů \textit{zpět} a \textit{vpřed} prohlížeče.
+Snippety jsou v aplikaci použity pro formuláře, datagridy a další. Detail konkrétních voleb obsahuje jednotlivé záložky, které také využívají snippetů a~AJAX požadavků. Knihovna Naja navíc umí simulovat historii prohlížení i~změnou URL adresy v adresním řádku prohlížeče, zároveň funguje i možnost v~historii listovat pomocí příkazů \textit{zpět} a~\textit{vpřed} prohlížeče.
 
 \n{3}{CSS styly}
 Aplikace využívá CSS frameworku Bootstrap původně vyvinutý ve společnosti Twitter a v současnosti jeden z nejpoužívanějších CSS frameworků vůbec \cite{Bootstrap}. Bootstrap umožňuje vytvářet responzivní stránky velice snadno pouze použitím CSS tříd. Použitá verze (Bootstrap v4.6) využívá \textit{flexbox} k dosažení responzivního vzhledu. Tento framework (a verze) byl zvolen vzhledem k dostupným rozšířením pro Nette formuláře a datagridy, které tak působí jednotným vzhledem. Některé formuláře musely být i tak vykresleny manuálně, aby bylo dosaženo požadovaného vzhledu, především kvůli nedokonalému zobrazení chyb ve formuláři.
@@ -13,7 +15,7 @@ Vlastní a upravené kaskádové styly jsou uloženy v \texttt{custom.css}, dal�
 
 \n{3}{Skripty a balíčky}
 
-Aplikace také využívá několik JavaScriptových knihoven a vlastních skriptů. Vlastními skripty jsou rozšíření pro knihovnu Naja a skript pro šifrování hlasů na straně klienta. Naja byla rozšířena o možnost nuceného přesměrování, indikaci načítání stránky při AJAXovém požadavku, zobrazení modálních oken a uložení obsahu editoru tinyMCE před odesláním formuláře na server.
+Aplikace také využívá několik JavaScriptových knihoven a vlastních skriptů. Vlastními skripty jsou rozšíření pro knihovnu Naja a skript pro šifrování hlasů na straně klienta. Naja byla rozšířena o možnost nuceného přesměrování, indikaci načítání stránky při AJAX požadavku, zobrazení modálních oken a uložení obsahu editoru tinyMCE před odesláním formuláře na server.
 \begin{itemize}
 	\item Naja - obsluha a zpracování AJAX požadavků
 	\item jQuery - knihovna pro manipulaci s Document Object Model (DOM)
@@ -22,5 +24,5 @@ Aplikace také využívá několik JavaScriptových knihoven a vlastních skript
 	\item toastr.js - zobrazení krátkých stavových zpráv (toastů)
 	\item charts.js - interaktivní grafy
 	\item tinyMCE - WYSIWYG textový editor ve formulářových polích \texttt{textarea}
-	\item SweetAlert2 - uživatelsky přívětivé upozornění a dialogová okna
+	\item SweetAlert2 - uživatelsky přívětivá dialogová okna
 \end{itemize}

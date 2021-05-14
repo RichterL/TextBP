@@ -4,15 +4,19 @@
 
 % ============================================================================ %
 \nn{Úvod}
-V době rapidního rozvoje technologií, kdy se digitalizuje kde co a prakticky vše je na dosah ruky díky internetu a mobilním telefonům, se stále více aspektů života přesouvá na obrazovky v komfortu našich domovů. Týká se to například i vyřizování oficiálních záležitostí a komunikace se státní správou. Velkou výzvou je ovšem přenést jeden ze základních pilířů demokracie - volby - co nejblíže k voliči. Dostupnost voleb v internetovém prohlížeči nemusí být jen o komfortu, což dokládá aktuální pandemie Covid-19. V současné situaci by takovou možnost jistě uvítal nejeden volič.
+V době rapidního rozvoje technologií, kdy se digitalizuje kde co a prakticky vše je na~dosah ruky díky internetu a mobilním telefonům, se stále více aspektů života přesouvá na obrazovky v komfortu našich domovů. Týká se to například i vyřizování oficiálních záležitostí a komunikace se státní správou. Velkou výzvou je ovšem přenést jeden ze základních pilířů demokracie - volby - co nejblíže k voliči. Dostupnost voleb v internetovém prohlížeči nemusí být jen o komfortu, což dokládá aktuální pandemie Covid-19. V současné situaci by takovou možnost jistě uvítal nejeden volič.
+
+\bigskip
 
 Cílem této práce je vytvořit funkční webovou aplikaci umožňující provozovat volby do akademických senátů na Univerzitě Tomáše Bati ve Zlíně, která bude uživatelsky přívětivá a zároveň bezpečná. V teoretické části budou prozkoumány obecné požadavky elektronických voleb, které by aplikace měla splňovat. Na základě stanovených požadavků a zvolené kryptografické metody zajišťující anonymitu voleb pak bude postupně navrhována aplikace.
 
-Dále je představen architektonický vzor Model View Controller a framework Nette, se kterým mám praktické zkušenosti. Teoretickou část práce tvoří převážně abstraktní návrh aplikace, která byla od začátku tvořena s ohledem na jednoduchost budoucích úprav. Aplikace podobného typu by z pohledu zdrojového kódu a struktury měla být přehledná a její údržba a rozšiřování snadné. I z tohoto důvodu bylo při modelování i implementaci dbáno na co nejlepší dodržení zásad Domain Driven Designu.
+Dále je představen architektonický vzor Model View Controller a framework Nette, se kterým mám praktické zkušenosti. Teoretickou část práce tvoří převážně abstraktní návrh aplikace, která byla od začátku tvořena s ohledem na jednoduchost budoucích úprav. Aplikace podobného typu by z pohledu zdrojového kódu a struktury měla být přehledná a její údržba a rozšiřování snadné. I z tohoto důvodu bylo při modelování i~implementaci dbáno na co nejlepší dodržení zásad Domain Driven Designu.
 
-V praktické části jsou detailněji popsány jednotlivé části aplikace a jejich funkce a vzájemné provázání. Nejpodstatnější a pravděpodobně i nejzajímavější částí je způsob zpracování a nakládání s hlasovacími lístky, kterému je věnován závěr práce.
+\bigskip
 
-Téma práce bylo navrženo vedoucím práce, jako možné řešení voleb a hlasování akademických orgánů UTB, jelikož vlastní aplikací nedisponuje. Vzhledem k osobním zkušenostem s programováním webových aplikací mě tato výzva zaujala především možností vytvořit aplikaci od návrhu až po její finální implementaci. Aplikace zároveň není pouze teoretickým příkladem, ale řešením reálného problému, který by mohl být uplatněn v praxi.
+V praktické části jsou detailněji popsány jednotlivé části aplikace a~jejich funkce a~vzájemné provázání. Nejpodstatnější a pravděpodobně i nejzajímavější částí je způsob zpracování a nakládání s hlasovacími lístky, kterému je věnován závěr práce.
+
+Téma práce bylo navrženo vedoucím práce, jako možné řešení voleb a hlasování akademických orgánů UTB, jelikož vlastní aplikací univerzita nedisponuje.
 
 % ============================================================================ %
 
@@ -50,6 +54,16 @@ Nette za velkými hráči rozhodně nezaostává a naopak přináší velice int
 \cast{Praktická část}
 \n{1}{Implementace návrhu}
 Konkrétní implementace modelu popsaného v teoretické části probíhala postupně a~vyvíjela se. Některé způsoby se po čase ukázaly jako nevhodné či nedokonalé a bylo potřeba je upravit resp. přepracovat tak, aby aplikace jako celek byla funkční. Během vývoje aplikace bylo změněno i IDE z Visual Studio Code na PHPstorm, což je místy vidět v rozdílných PHPdoc komentářích zdrojového kódu.
+
+\bigskip
+
+Vyvíjená aplikace si klade za cíl poskytnout přístupnou alternativu k tradičnímu hlasování ve volbách. Tohoto je dosaženo především přímočarým a responzivním designem, který by měl uživatele intuitivně provést volebním procesem.
+
+Celý systém byl od počátku navrhován s předpokladem jeho budoucího rozšiřování a úprav. Jednotlivé části tak obsahují různé stupně abstrakce a co nejvolnější vazby. Díky použití Nette a vhodně zvolených rozšíření je také relativně snadné do aplikace zavést například podporu pro více jazyků.
+
+\bigskip
+
+V následujících kapitolách budou popsány jednotlivé vrstvy aplikace podle DDD, tedy: doménová vrstva, vrstva infrastruktury a v neposlední řadě i aplikační a~prezentační vrstvy.  Samotnou kapitolu pak tvoří popis zpracování hlasovací lístků, kde je podrobně rozebrána jejich validace a šifrování.
 
 \n{2}{Členění aplikace}
 \input{tex/chapters/cleneni.tex}

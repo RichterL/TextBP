@@ -1,0 +1,37 @@
+\subsection*{Systémové požadavky}
+Aplikace ke svému provozu vyžaduje:
+\begin{itemize}
+	\item HTTP server - otestován nginx a Apache2
+	\item aktivní SSL šifrování (HTTPS) - pro testování stačí self-signed certifikát\footnote{aplikace využívá WebCrypto API, které funguje pouze v SSL prostředí více na: https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto}
+	\item Databázový server - otestováno MySQL a MariaDb, vyžadována konfigurace \Verb{secure_file_priv = ""}\footnote{omezuje import a export souborů na daný adresář, upravuje se v konfiguračním souboru nebo pomocí parametru příkazové řádky při spuštění serveru}
+	\item PHP verze 7.4 (verze 8.0 netestována, teoreticky funkční)
+	\item PHP rozšíření php-ldap (php-gmp doporučeno)
+	\item Composer (správa PHP balíčků) - seznam balíčků je níže, instalace je automatická
+\end{itemize}
+
+\subsection*{Základní instalace}
+\begin{itemize}
+	\item Následujícím příkazem nainstalujte celý projekt včetně balíčků závislostí \Verb{composer create-project richterl/elektronicke-volby /path/to/install} 
+	\item Virtual host HTTP serveru musí směřovat pouze na adresáře \texttt{www} a \texttt{www{\_}backend}. 
+	\item Především adresáře \texttt{app} a \texttt{log} a \texttt{temp} \textbf{nesmí} být přístupné z prohlížeče\footnote{https://nette.org/cs/security-warning}!
+	\item Adresáře \texttt{log} a \texttt{temp} musí být zapisovatelné pro všechny (world-writable)
+	\item Soubor \texttt{app/config/local.neon.default} obsahuje přednastavené hodnoty pro připojení k univerzitnímu LDAP serveru (dostupný pouze v rámci sítě UTB) a konfiguraci připojení k databázi - tu je potřeba doplnit. Upravený soubor přejmenujte na \texttt{local.neon}
+	\item V adresáři \texttt{bin} naleznete soubory pro základní zprovoznění databáze. \texttt{export.sql} (struktura) a \texttt{install.sql} - hodnoty vyžadované pro základní běh aplikace (administrátorský účet, ACL).
+	\item Upravte soubor \texttt{app/Router/RouterFactory.php} tak, aby reflektoval skutečný stav.
+	\item Aplikace by nyní měla být funkční a dostupná na adresách \texttt{https://admin.volby.l} a \texttt{https://volby.l} (pro lokální instalaci)
+\end{itemize}
+
+\subsection*{Seznam používaných Composer balíčků}
+\centering
+	\begin{tabular}{lc}
+		\textbf{Název balíčku}				& \textbf{Minimální verze} \\
+		\hline
+		Nette (včetně všech rozšíření)		& 3.1	\\
+		contributte/forms-bootstrap			& 0.4	\\
+		contributte/forms-multiplier			& 3.2	\\
+		contributte/pdf						& 6.1	\\
+		ublaboo/datagrid						& 6.7	\\
+		dibi/dibi							& 4.2	\\
+		phpseclib/phpseclib					& 3.0	\\
+		
+	\end{tabular}

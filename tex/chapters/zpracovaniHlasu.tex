@@ -68,43 +68,14 @@ Sčítání hlasů je umožněno pouze po skončení voleb a to uživatelům s p
 Při nahrávání veřejné části RSA klíče je kontrolováno, jestli se jedná o veřejný RSA klíč, který aplikace dokáže použít. Zodpovědnost za poskytnutí správného klíče je ovšem na volební komisi. Pokud by byl poskytnut například klíč, jež je chráněn heslem, aplikace by v současné verzi hlasy nedokázala dešifrovat. Zároveň není umožněno vyzkoušet kompatibilitu veřejného a privátního klíče s aplikací, aby server nepřišel do kontaktu s privátním kíčem dříve než je to absolutně nezbytné.
 
 Pro volby s ukončeným hlasováním je v backendové části aplikace zpřístupněna volba nahrání privátního klíče a v záložce výsledků také tlačítko pro sečtení hlasů. Kliknutí na tlačítko vede na signál \texttt{countBallots}. Proces sčítání hlasů řídí třída \texttt{BallotCounter}, která je závislostí \texttt{ElectionPresenter}. Jediná veřejná metoda této třídy je \phpinline{processBallots($election): array}%$
-, která deleguje dešifrování a validaci hlasovacích lístků na třídy \texttt{BallotDecryptor} a \texttt{BallotValidator} a samotné sečtení hlasů provádí sama. Jednotlivé metody této třídy jsou vidět ve fragmentu \ref{php:BallotCounter}.
-
-\begin{listing}[ht]
-\phpsnippet{tex/code/BallotCounter.php}
-\caption{Metody třídy BallotCounter}
-\label{php:BallotCounter}
-\end{listing}
+, která deleguje dešifrování a validaci hlasovacích lístků na třídy \texttt{BallotDecryptor} a \texttt{BallotValidator} a samotné sečtení hlasů provádí sama. Jednotlivé metody této třídy jsou vidět v příloze \ref{priloha:fragmenty}.
 
 Třída \texttt{BallotDecryptor} obsahuje dvě veřejné metody volané z třídy \texttt{BallotCounter}, metoda \phpinline{setElection()} pouze nastaví aktuálně zpracovávané volby a \phpinline{decryptBallots()} nejprve načte zašifrované hlasovací lístky z repozitáře, následně metodou \phpinline{verify($ballot)}%$
- ověří, že hash a podpis uložené v databázi odpovídá zpracovávanému volebnímu lístku a nakonec dešifruje AES klíč, kterým dešifruje samotná data. Dešifrovaná data jsou poté nastavena novému objektu \phpinline{DecryptedBallot}, který je repozitářem uložen. V případě chyby při ověřování, dešifrování a dalších, je chyba zaznamenána do logu (souboru) včetně identifikace hlasovacího lístku. Kód dešifrování je vidět na fragmentu \ref{php:BallotDecryptor}.
+ ověří, že hash a podpis uložené v databázi odpovídá zpracovávanému volebnímu lístku a nakonec dešifruje AES klíč, kterým dešifruje samotná data. Dešifrovaná data jsou poté nastavena novému objektu \phpinline{DecryptedBallot}, který je repozitářem uložen. V případě chyby při ověřování, dešifrování a dalších, je chyba zaznamenána do logu (souboru) včetně identifikace hlasovacího lístku. Kód dešifrování je vidět v příloze \ref{priloha:fragmenty}.
   
-Třída \texttt{BallotValidator} má za úkol ověřit, že všechny dešifrované hlasovací lístky jsou platné a splňují pravidla nastavená pro dané volby. V zásadě se jedná o pozdní validaci hlasovacího formuláře, jak bylo popsáno v části \ref{section:hlasovaniValidace}. Tato třída obsahuje identické metody jako \texttt{BallotDecryptor} pro nastavení voleb a zpracování lístků. Z~repozitáře jsou získány všechny dešifrované volební lístky a postupně ověřena data v~nich obsažená, že splňují nastavená kritéria. Jmenovitě, že identifikátor voleb souhlasí s aktuálně zpracovávanými a že povinné otázky jsou zodpovězeny a všechny otázky splňují limity pro minimální a maximální počet odpovědí. Kód validace je vidět na~fragmentech \ref{php:BallotValidator} a \ref{php:BallotValidator2}.
+Třída \texttt{BallotValidator} má za úkol ověřit, že všechny dešifrované hlasovací lístky jsou platné a splňují pravidla nastavená pro dané volby. V zásadě se jedná o pozdní validaci hlasovacího formuláře, jak bylo popsáno v části \ref{section:hlasovaniValidace}. Tato třída obsahuje identické metody jako \texttt{BallotDecryptor} pro nastavení voleb a zpracování lístků. Z~repozitáře jsou získány všechny dešifrované volební lístky a postupně ověřena data v~nich obsažená, že splňují nastavená kritéria. Jmenovitě, že identifikátor voleb souhlasí s aktuálně zpracovávanými a že povinné otázky jsou zodpovězeny a všechny otázky splňují limity pro minimální a maximální počet odpovědí. Kód validace je vidět v příloze \ref{priloha:fragmenty}.
 
 \n{2}{Výsledky}
 Výstupem validace jsou tři pole volebních lístků - platné, neplatné a chybné. Neplatné jsou ty, které neprošly validací (nesprávný počet odpovědí apod.), chybné jsou pak ty, které se nepovedlo zpracovat. Všechny chyby jsou opět zaznamenány do logu. Třída \texttt{BallotCounter} si připraví počítadlo pro všechny možné odpovědi v daných volbách a~platné lístky jsou předány ke sčítání metodě \phpinline{countResults($ballots)}%$
 . Ta projde každou otázku a navýší počítadlo pro každou vyplněnou odpověď. Konečný stav počítadla je pak vrácen do \texttt{ElectionPresenter}, který nastaví výsledky do objektu \texttt{Election} a předá ho repozitáři k uložení. Od té chvíle jsou dostupné výsledky voleb k zobrazení v obou částech aplikace. Na frontendové části se zobrazí pouze oprávněným voličům a to pouze pokud jsou dané volby stále aktivní. Po deaktivaci voleb se výsledky zobrazují pouze v backendové části. Výsledky voleb je rovněž možné stáhnout do počítače ve formě PDF protokolu z kontextové nabídky v detailu voleb.
 
-\clearpage
-\begin{listing}[ht]
-\phpsnippet{tex/code/BallotDecryptor.php}
-\caption{Metody třídy BallotDecryptor}
-\label{php:BallotDecryptor}
-\end{listing}
-
-\clearpage
-\begin{listing}[ht]
-\phpsnippet[lastline=43]{tex/code/BallotValidator.php}
-\caption{Metody třídy BallotValidator (1)}
-\label{php:BallotValidator}
-\end{listing}
-
-
-\clearpage
-\begin{listing}[ht]
-\phpsnippet[firstline=44]{tex/code/BallotValidator.php}
-\caption{Metody třídy BallotValidator (2)}
-\label{php:BallotValidator2}
-\end{listing}
-
-\clearpage

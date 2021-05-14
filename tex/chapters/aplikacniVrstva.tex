@@ -22,3 +22,5 @@ Zkráceně gridy, tyto interaktivní tabulky umožňují kromě zobrazení dat i
 \end{figure}
 
 Akce nad řádkem jsou typicky úlohy typu editace, mazání zobrazení detailu a~směřují na \textit{Signál} presenteru (metody \texttt{handle}). Jsou reprezentovány ikonami. Požadavek na~vymazání řádku (záznamu) je navíc opatřen potvrzovacím dialogovým oknem, aby nedošlo k nechtěnému smazání při nechtěném kliknutí.
+
+Datagridy jsou vytvářeny pomocí třídy \phpinline{App\Backend\Utils\DataGrid\Datagrid}, která zefektivňuje způsob vytváření jednotlivých gridů díky zapouzdření často používaných konstrukcí. Tím se nejen výsledný kód v presenterech zjednoduší, ale zároveň gridy napříč aplikací mají stejné chování a na všechny se aplikuje stejná logika. Tímto přístupem se také podstatně usnadní změny ovlivňující všechny gridy - například změna ikony se projeví všude.
