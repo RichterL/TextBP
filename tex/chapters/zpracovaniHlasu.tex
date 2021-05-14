@@ -14,7 +14,7 @@ Ve fragmentu \ref{php:validaceSkripty} jsou vidět skripty a balíčky, které j
 
 \clearpage
 \n{2}{Validace}\label{section:hlasovaniValidace}
-Validace formuláře na straně klienta je všeobecně považována za pouhé usnadnění pro uživatele, umožňuje rychle a přehledně uživatele informovat o nesrovnalostech ve~formuláři. Nicméně, veškerá data přijatá od klienta (prohlížeče) by měla být považována za potenciálně nebezpečná a nevalidní, jelikož upravit data před odesláním nebo upravit JavaScriptové validační skripty není nemožné \cite{Validace1}\cite{Validace2}\cite{Validace3}.
+Validace formuláře na straně klienta je všeobecně považována za pouhé usnadnění pro uživatele, umožňuje rychle a přehledně uživatele informovat o nesrovnalostech ve~formuláři. Nicméně, veškerá data přijatá od klienta (prohlížeče) by měla být považována za potenciálně nebezpečná a nevalidní, jelikož upravit data před odesláním nebo upravit JavaScriptové validační skripty není nemožné \cite{Sklar2018}\cite{Validace1}\cite{Validace2}\cite{Validace3}.
 
 Je nutné tedy počítat s tím, že data jsou validována již na straně klienta, ale pouze pro potřeby voliče - aby mu byly přehledně komunikovány jakékoli chyby, kterých se během vyplňování hlasovacího lístku dopustil. Na server se data dostanou zašifrována a nebylo by již možné ověřit jejich platnost. To by mohlo snadno vyústit ve vysoké procento neplatných hlasů a v horším případě četným námitkám proti platnosti voleb samotných. Nutnost validovat data na straně serveru nicméně zůstává, pouze se odkládá na dobu, kdy budou data serverem čitelná - sčítání hlasů.
 

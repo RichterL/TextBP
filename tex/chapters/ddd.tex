@@ -14,7 +14,7 @@ Při srovnání koncepcí vrstev podle MVC/P a DDD lze říci, že se vhodně p�
 
 	\item \textbf{Aggregate} - skupina entit, která v doméně představuje celek. \it{Root Aggregate} pak představuje vstupní bod pro okolní objekty k agregátovi. Objekty uvnitř agregátu mohou mít libovolné vazby mezi sebou, ale ne na okolní objekty. Převážná část business logiky by se měla odehrávat právě zde.
 	\item \textbf{Module} - logické propojení (v kontextu domény) entit a agregátů vytváří moduly / balíčky.
-	\item \textbf{Factory} - továrny na objekty zapouzdřují proces vytváření nových objektů. Může to být metoda agregátu, která vytváří instance jednotlivých entit a value objektů nebo samostatná třída.
+	\item \textbf{Factory} - továrny na objekty zapouzdřují proces vytváření nových objektů. Může to být metoda agregátu, která vytváří instance jednotlivých entit a value objektů nebo samostatná třída. Využívá se některého z návrhových vzorů Factory \cite{Vrana2013}\cite{Boehmer2015}
 	\item \textbf{Service} - pokud nějaká operace nedává smysl v rámci jednoho objektu, může být zapouzdřena do samostatného objektu služby.
-	\item \textbf{Repository} - získávání objektů, jejich perzistence (ukládání, mazání) je zapouzdřeno do samostatných repozitářů.
+	\item \textbf{Repository} - získávání objektů, jejich perzistence (ukládání, mazání) je zapouzdřeno do samostatných repozitářů. 
 \end{itemize}

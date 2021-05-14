@@ -104,7 +104,25 @@ Výzva představená zadáním práce mě zaujala možností vytvořit aplikaci 
 \OdsazovaniOdstavcuStop
 
 % ============================================================================ %
-\seznamlitbib
+%\seznamlitbib
+
+
+\tolerance=100
+\emergencystretch=1em
+\hyphenpenalty=10
+\hbadness=10000
+\clearpage
+	\phantomsection
+	\addcontentsline{toc}{section}{Seznam použité literatury}
+
+	\begin{thebibliography}{99}
+	\input{tex/bib/final.tex}
+	\end{thebibliography}
+
+\tolerance=1
+\emergencystretch=\maxdimen
+\hyphenpenalty=10000
+\hbadness=10000
 
 % ============================================================================ %
 \input{tex/zkratky.tex} % Seznam zkratek
