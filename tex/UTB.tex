@@ -405,24 +405,23 @@
 \newcommand{\zadani}{
 	\clearpage
 	\thispagestyle{empty}
-\voffset=\valueVOffset
-\hoffset=0pt
-\evensidemargin=0pt\oddsidemargin=0pt\headsep=0pt\headheight=0pt
-\setlength{\parskip}{3pt}\setlength{\parindent}{0pt}
+\voffset=\valueVOffset\evensidemargin=\valueSideMargin\oddsidemargin=\valueSideMargin
+\headsep=\valueHeadSep\headheight=\valueHeadHeight\setlength{\parskip}{3pt}\textheight=\valueTextHeight\textwidth=\valueTextWidth
 
-\begin{figure*}[tp]
-  \noindent\makebox[\textwidth]{%
-	\includegraphics[height=\textheight]{graphics/zadani_A.png}}
-\end{figure*}
-
+\voffset=-3cm\headsep=0pt\headheight=0pt\topmargin=0.61cm\setlength{\parskip}{0pt}
+\begin{figure*}[ht]\begin{adjustwidth}{-4cm}{-2cm}
+\centering  
+	\includegraphics[scale=1]{graphics/zadani_A.png}
+\end{adjustwidth}\end{figure*}
 \clearpage
 \thispagestyle{empty}
-\begin{figure*}[tp]
-  \noindent\makebox[\textwidth]{%
-	\includegraphics[height=\textheight]{graphics/zadani_B.png}}
-\end{figure*}
-
-
+\voffset=-3cm\headsep=0pt\headheight=0pt\topmargin=1.61cm\setlength{\parskip}{0pt}
+\begin{figure*}[ht]\begin{adjustwidth}{-2cm}{-2cm}
+\centering
+	\includegraphics[scale=0.9]{graphics/zadani_B.png}
+\end{adjustwidth}\end{figure*}
+\clearpage
+\voffset=\valueVOffset\evensidemargin=\valueSideMargin\oddsidemargin=\valueSideMargin\headsep=\valueHeadSep\headheight=\valueHeadHeight\setlength{\parskip}{3pt}\textheight=\valueTextHeight\textwidth=\valueTextWidth\topmargin=0.61cm
 }
 
 % Nastaveni zobrazovani zahlavi dokumentu
